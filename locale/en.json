@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "title": "ARIS Wiki",
+    "description": "Read-only search and reading over the local ARIS knowledge assets: upstream docs, replacement matrix, project literature, notes and search logs."
+  },
+  "title": "ARIS Wiki",
+  "description": "Search ARIS docs, project literature, notes and search logs in one panel; read-only, no new storage.",
+  "search": "Search title, path or excerpt…",
+  "all": "All",
+  "refresh": "Refresh",
+  "empty": "No indexable Markdown was found.",
+  "noMatch": "No matching entries.",
+  "pick": "Pick a document on the left to start reading.",
+  "loading": "Loading the knowledge index…",
+  "truncated": "Larger than 200KB; showing the first part only.",
+  "copied": "Copied"
+}

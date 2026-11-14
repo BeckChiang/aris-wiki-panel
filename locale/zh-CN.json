@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "title": "ARIS 知识库",
+    "description": "只读检索与阅读本机 ARIS 知识资产：上游文档、替代矩阵、项目文献、笔记与检索日志。"
+  },
+  "title": "ARIS 知识库",
+  "description": "一屏检索 ARIS 上游文档、项目文献、笔记与检索日志；只读，不新建任何存储。",
+  "search": "搜索标题、路径或摘要…",
+  "all": "全部",
+  "refresh": "刷新",
+  "empty": "没有找到可索引的 Markdown 文件。",
+  "noMatch": "没有匹配的条目。",
+  "pick": "从左侧选一篇开始阅读。",
+  "loading": "正在读取知识库索引…",
+  "truncated": "正文超过 200KB，已截断显示前半部分。",
+  "copied": "已复制"
+}

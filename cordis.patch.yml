@@ -1,0 +1,3 @@
+- insert:
+    - id: aris-wiki
+      name: '@local/aris-wiki'

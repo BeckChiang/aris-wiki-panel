@@ -1,11 +1,11 @@
 {
   "repo": "BeckChiang/aris-wiki-panel",
-  "generated_at": "2026-11-14T13:15:35.623Z",
+  "generated_at": "2026-11-17T02:08:16.901Z",
   "note": "由 scripts/sync.mjs 从本机 DSH 工作区单向生成；本文件为发布快照标识，请勿手改。",
   "rules_version": 1,
   "counts": {
     "files": 12,
-    "bytes": 130317
+    "bytes": 160725
   },
   "excluded": [
     "tests",
@@ -24,8 +24,8 @@
     },
     {
       "p": "client.js",
-      "sha256": "ac0286d327d2f102",
-      "bytes": 63382
+      "sha256": "aa5d6810c3216ea7",
+      "bytes": 80704
     },
     {
       "p": "cordis.patch.yml",
@@ -39,8 +39,8 @@
     },
     {
       "p": "index.js",
-      "sha256": "d16ab2a2b82d7664",
-      "bytes": 23768
+      "sha256": "614da822037ce125",
+      "bytes": 23779
     },
     {
       "p": "lib/artifacts.mjs",
@@ -49,8 +49,8 @@
     },
     {
       "p": "lib/plan.mjs",
-      "sha256": "dcd0f6b94df5e971",
-      "bytes": 21142
+      "sha256": "b697740add76086c",
+      "bytes": 33026
     },
     {
       "p": "LICENSE",
@@ -69,13 +69,13 @@
     },
     {
       "p": "package.json",
-      "sha256": "9cba795ae7f2931b",
-      "bytes": 780
+      "sha256": "0ea260e9e90eb874",
+      "bytes": 835
     },
     {
       "p": "README.md",
-      "sha256": "27c9b4c5f779d02f",
-      "bytes": 5218
+      "sha256": "a9fccb572919781e",
+      "bytes": 6354
     }
   ]
 }

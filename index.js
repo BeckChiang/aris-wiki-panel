@@ -611,7 +611,7 @@ export function apply(ctx, config = {}) {
       if (!name || name === 'all') return json(res, 200, allOf(workspace));
       const target = findPipeline(workspace, name);
       if (!target) return json(res, 404, { ok: false, error: `没有登记这条流水线：${name}` });
-      const detail = planOf(target, { history: Number(url.searchParams.get('history')) || undefined });
+      const detail = planOf(target, { history: Number(url.searchParams.get('history')) || undefined, workspace });
       json(res, detail.ok ? 200 : 404, detail);
     } catch (error) {
       logger?.error?.(`[aris-wiki] plan 失败：${messageOf(error)}`);

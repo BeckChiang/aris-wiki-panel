@@ -1,9 +1,9 @@
 {
   "name": "@local/aris-wiki",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "ARIS 知识库：在 Web UI 侧栏一屏检索与阅读本机的 ARIS 上游文档、替代矩阵、项目文献、笔记与检索日志（只读，不新建存储）。",
+  "description": "Aris_Wiki：Web UI 侧栏只读看板，三个页签——计划（流水线状态/阻碍/阶段/门禁，与 Aris_Dsh 同源）、产物（论文图实验审查预览）、文档（一屏检索阅读 ARIS 知识资产）。",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

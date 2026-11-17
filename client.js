@@ -587,39 +587,6 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-step-o{flex:0 0 auto;font-size:10.5px;opacity:.5;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .daw-hist .daw-tbl{margin-top:2px}
 
-
-.daw-seg.click{cursor:pointer;border:0;padding:0}
-.daw-seg.on{outline:2px solid currentColor;outline-offset:1px}
-.daw-planhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.daw-planhead-l,.daw-planhead-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.daw-note-i{opacity:.6;font-size:11.5px}
-.daw-legend{font-size:11.5px;opacity:.65;line-height:1.6}
-.daw-sech{display:flex;align-items:center;gap:8px;margin-top:4px}
-.daw-sech b{font-size:13px}
-.daw-mini{margin-left:auto;font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid rgba(127,127,127,.35);background:transparent;color:inherit;cursor:pointer}
-.daw-stages{display:flex;flex-direction:column;gap:4px}
-.daw-stage{border:1px solid rgba(127,127,127,.18);border-radius:8px;overflow:hidden}
-.daw-stage.cur{border-color:rgba(200,120,0,.55)}
-.daw-stage.sel{box-shadow:0 0 0 1px rgba(127,127,127,.25) inset}
-.daw-stage-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:inherit;cursor:pointer;font-size:12px}
-.daw-stage-i{opacity:.5;font-variant-numeric:tabular-nums;font-size:11px}
-.daw-stage-id{flex:0 0 auto}
-.daw-stage-t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.8}
-.daw-stage-n{opacity:.55;font-size:11px;white-space:nowrap}
-.daw-stage-x{opacity:.5;font-size:11px;white-space:nowrap}
-.daw-stage-b{padding:8px 12px 10px;display:flex;flex-direction:column;gap:8px}
-.daw-crit{font-size:11.5px;line-height:1.65;opacity:.85;display:flex;flex-direction:column;gap:2px}
-.daw-crit i{opacity:.55;font-style:normal;margin-right:4px}
-.daw-sub-h{font-size:11.5px;opacity:.6;margin-bottom:3px}
-.daw-planitem{display:flex;gap:6px;font-size:12px;line-height:1.6;padding:1px 0}
-.daw-ck{opacity:.45}
-.daw-step{display:flex;gap:6px;align-items:baseline;font-size:12px;line-height:1.6;padding:2px 0;border-top:1px dashed rgba(127,127,127,.14)}
-.daw-step-n{flex:0 0 34px;opacity:.45;font-size:10.5px;font-variant-numeric:tabular-nums;text-align:right}
-.daw-step-id{flex:0 0 auto;font-size:10.5px;padding:0 4px;border-radius:4px;background:rgba(127,127,127,.12)}
-.daw-step-t{flex:1 1 auto;min-width:0}
-.daw-step.ok .daw-step-t{opacity:.85}
-.daw-step.todo .daw-step-t{font-weight:600}
-.daw-step-o{flex:0 0 auto;font-size:10.5px;opacity:.5;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .daw-hist .daw-tbl{margin-top:2px}
 
 .daw-tl{display:flex;flex-direction:column;gap:2px;margin-top:4px}
@@ -636,10 +603,124 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-arts-wrap{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
 .daw-pipes{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .daw-mini.back{margin:0 6px 0 0}
+/* 计划详情：状态条 / 分组折叠 / 阻碍动作 / 日志抽屉（新增，勿与上面重复定义） */
+.daw-card[role=button]{cursor:pointer}
+.daw-card-sub{font-size:11.5px;opacity:.62;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daw-card-now{font-size:11.5px;opacity:.8;font-variant-numeric:tabular-nums}
+.daw-badge.review{color:#b26a00;border-color:rgba(178,106,0,.5)}
+.daw-now{display:flex;flex-wrap:wrap;gap:6px 18px;border:1px solid rgba(127,127,127,.18);border-radius:10px;padding:8px 12px;font-size:12px}
+.daw-now-i{display:flex;gap:6px;align-items:baseline;min-width:0}
+.daw-now-i.wide{flex:1 1 320px}
+.daw-now-k{font-size:11px;opacity:.55;white-space:nowrap}
+.daw-warn-t{color:var(--dsw-alias-state-warning-primary,#b26a00)}
+.daw-secbar{display:flex;align-items:center;gap:6px;margin:2px 0}
+.daw-secbar .daw-mini{margin-left:0}
+.daw-sec{border:1px solid rgba(127,127,127,.18);border-radius:10px;overflow:hidden}
+.daw-sec-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:inherit;cursor:pointer;font-size:12.5px}
+.daw-sec-h:hover{background:rgba(127,127,127,.1)}
+.daw-sec-x{opacity:.6;width:10px;flex:0 0 10px}
+.daw-sec-t{flex:0 0 auto}
+.daw-sec-n{font-size:11px;opacity:.6;font-variant-numeric:tabular-nums;padding:0 5px;border-radius:999px;background:rgba(127,127,127,.14)}
+.daw-sec-b{font-size:11.5px;opacity:.55;margin-left:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.daw-sec-body{padding:8px 10px 10px;display:flex;flex-direction:column;gap:6px}
+.daw-grp{border-top:1px dashed rgba(127,127,127,.16);padding-top:4px}
+.daw-grp:first-child{border-top:0;padding-top:0}
+.daw-grp-h{display:flex;align-items:center;gap:7px;width:100%;text-align:left;border:0;background:transparent;color:inherit;cursor:pointer;font-size:11.5px;opacity:.85;padding:3px 0}
+.daw-grp-h:hover{opacity:1}
+.daw-steps{display:flex;flex-direction:column;gap:1px;padding:2px 0 2px 14px}
+.daw-stage-h.cur{background:rgba(200,120,0,.08)}
+.daw-step.ext .daw-step-t{color:var(--dsw-alias-state-warning-primary,#b26a00)}
+.daw-step-badge{flex:0 0 auto;font-size:10px;padding:0 5px;border-radius:4px;border:1px solid rgba(127,127,127,.35);opacity:.75}
+.daw-planitem-t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.daw-planitem-k{flex:0 0 auto;font-size:10.5px;opacity:.55;font-variant-numeric:tabular-nums}
+.daw-planitem-k.none{opacity:.35}
+.daw-planitem.done .daw-planitem-k{color:#0f766e;opacity:.9}
+.daw-planitem.done .daw-planitem-t{opacity:.75}
+.daw-planitem.doing .daw-ck{color:var(--dsw-alias-state-warning-primary,#b26a00);opacity:1}
+.daw-act{flex:0 0 auto;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid rgba(127,127,127,.45);background:transparent;color:inherit;cursor:pointer;white-space:nowrap}
+.daw-act:hover{border-color:currentColor}
+.daw-act.soft{opacity:.8;border-style:dashed}
+.daw-block-k{font-size:10.5px;opacity:.6;font-variant-numeric:tabular-nums}
+.daw-tl-k.review{background:rgba(200,120,0,.16)}
+.daw-tl-k.run{background:rgba(15,118,110,.16)}
+.daw-tl-k.gate{background:rgba(127,127,127,.14)}
+.daw-drawer{border:1px solid rgba(127,127,127,.3);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.daw-drawer-h{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.daw-drawer-r{font-size:11px;opacity:.6;font-family:ui-monospace,Menlo,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 auto}
+.daw-drawer-h .daw-mini{margin-left:auto}
+.daw-pre{margin:0;max-height:320px;overflow:auto;font-size:11.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,Menlo,monospace;background:rgba(127,127,127,.06);border-radius:8px;padding:8px}
+.daw-toast{position:sticky;bottom:0;margin-top:4px;font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(127,127,127,.14);word-break:break-all}
 `;
 
-    const ST = { running: '运行中', idle: '待命', paused: '已暂停', stopped: '已停', error: '出错', blocked: '被阻塞' };
+    // 状态词汇与数据层 statusOf() 一致（也等于 dsh 面板 stateOf 的那一套），
+    // 两处看到的字必须一样，否则又变成两份互相矛盾的结论。
+    const ST = {
+      running: '正在运行',
+      stopping: '停止中',
+      review: '等待审核',
+      human: '等待人工',
+      idle: '待命',
+      paused: '已暂停',
+      stopped: '已停止',
+      error: '出错',
+      blocked: '被阻塞',
+      done: '已完成',
+      in_progress: '进行中',
+      pending: '未开始',
+      failed: '失败',
+    };
     const stText = (s) => ST[s] || s || '未知';
+    const stOf = (obj) => (obj && (obj.statusKey || obj.status)) || 'unknown';
+    const sevIcon = (sev) => (sev === 'error' ? '✕' : sev === 'warn' ? '!' : 'i');
+    const fmtDur = (min) => {
+      const n = Math.round(Number(min));
+      if (!Number.isFinite(n) || n < 0) return '-';
+      if (n < 60) return n + ' 分钟';
+      const hh = Math.floor(n / 60);
+      const mm = n % 60;
+      return mm ? hh + ' 小时 ' + mm + ' 分' : hh + ' 小时';
+    };
+
+    // 可折叠分区：计划详情里每个内容组都走它，默认只展开「当前阶段 / 阻碍」。
+    function Section(props) {
+      const open = !!props.open;
+      return h(
+        'div',
+        { className: 'daw-sec' + (open ? ' open' : ''), id: props.id },
+        h(
+          'button',
+          { type: 'button', className: 'daw-sec-h', onClick: props.onToggle, 'aria-expanded': open },
+          h('span', { className: 'daw-sec-x' }, open ? '▾' : '▸'),
+          h('b', { className: 'daw-sec-t' }, props.title),
+          props.count != null ? h('span', { className: 'daw-sec-n' }, String(props.count)) : null,
+          props.brief ? h('span', { className: 'daw-sec-b' }, props.brief) : null,
+          props.extra || null,
+        ),
+        open ? h('div', { className: 'daw-sec-body' }, props.children) : null,
+      );
+    }
+
+    // 阻碍上的动作按钮。open-log / open-gate / open-pipeline 是真的能点的；
+    // open-mailbox / open-settings 要跨到 Aris_Dsh 面板，没有公开 API（需求待定问题①），
+    // 所以降级成「复制路径 + 提示去 Aris_Dsh」，不做点了没反应的假按钮。
+    function ActionBtn(props) {
+      const action = props.action;
+      if (!action) return null;
+      const soft = action.kind === 'open-mailbox' || action.kind === 'open-settings';
+      return h(
+        'button',
+        {
+          type: 'button',
+          className: 'daw-act' + (soft ? ' soft' : ''),
+          title: soft ? '复制路径，去 Aris_Dsh 面板操作' : action.label,
+          onClick: (event) => {
+            if (event && event.stopPropagation) event.stopPropagation();
+            props.onRun(action);
+          },
+        },
+        action.label,
+      );
+    }
     const pct = (n) => `${Math.round(Math.max(0, Math.min(1, Number(n) || 0)) * 100)}%`;
     const money = (n) => `¥${(Number(n) || 0).toFixed(2)}`;
 
@@ -655,7 +736,13 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
             type: 'button',
             className: 'daw-seg ' + (s.status || 'pending') + (props.activeId === s.id ? ' on' : '') + (props.onPick ? ' click' : ''),
             title: (i + 1) + '. ' + s.id + ' · ' + stText(s.status) + (s.title ? ' · ' + s.title : '') + (s.doneCount != null ? ' · 已执行 ' + s.doneCount + ' · 待做 ' + s.todoCount : ''),
-            onClick: props.onPick ? () => props.onPick(s) : undefined,
+            onClick: props.onPick
+              ? (event) => {
+                  if (event && event.stopPropagation) event.stopPropagation();
+                  if (event && event.preventDefault) event.preventDefault();
+                  props.onPick(s);
+                }
+              : undefined,
           }),
         ),
       );
@@ -671,22 +758,52 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       );
     }
 
+    function nowLineOf(c) {
+      const nd = c.nowDoing || {};
+      if (nd.running) {
+        return '本轮 ' + ft(nd.startedAt) + ' 起 · 已跑 ' + fmtDur(nd.elapsedMin) + ' · ' + nd.steps + '/' + (nd.callsMax || '-') + ' 步 · 上下文 ' + pct(nd.ctxPct);
+      }
+      if (nd.startedAt) return '上一轮 ' + ft(nd.startedAt) + ' 起 · ' + fmtDur(nd.elapsedMin) + ' · ' + nd.steps + ' 步';
+      return '还没有执行记录';
+    }
+
+    // 卡片本体不能用 <button> 包 <button>：内层 rail 的按钮在 button 里是非法嵌套，
+    // 浏览器把点击算给外层，rail 就看起来「点不动」。改成 div + role=button。
     function PipeCard(props) {
       const c = props.card;
       const budget = c.budget || { ctxPct: 0, steps: 0 };
+      const st = stOf(c);
+      const pend = c.pending || { count: 0 };
       return h(
-        'button',
-        { type: 'button', className: `daw-card${c.human ? ' human' : ''}`, onClick: () => props.onPick(c.name) },
+        'div',
+        {
+          className: 'daw-card' + (c.human ? ' human' : ''),
+          role: 'button',
+          tabIndex: 0,
+          onClick: () => props.onPick(c.name),
+          onKeyDown: (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              props.onPick(c.name);
+            }
+          },
+        },
         h(
           'div',
           { className: 'daw-card-h' },
-          h('span', { className: `daw-dot ${c.status}` }),
+          h('span', { className: 'daw-dot ' + st }),
           h('b', null, c.name),
-          h('span', { className: `daw-badge ${c.status}` }, stText(c.status)),
+          h('span', { className: 'daw-badge ' + st }, c.statusLabel || stText(st)),
           c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
-          h('span', { className: 'daw-card-r' }, `${c.state || '-'} · 阶段 ${c.stageIndex || 0}/${c.stageTotal || 0}`),
+          pend.count ? h('span', { className: 'daw-badge review' }, '等回件 ' + pend.count) : null,
         ),
-        h(Rail, { stages: c.stages || [] }),
+        h(
+          'div',
+          { className: 'daw-card-sub' },
+          (c.stageIndex || 0) + '/' + (c.stageTotal || 0) + ' · ' + (c.stageTitle || c.stageId || '-') + (c.state ? ' · ' + c.state : ''),
+        ),
+        h(Rail, { stages: c.stages || [], onPick: (s) => props.onPick(c.name, s.id) }),
+        h('div', { className: 'daw-card-now' }, nowLineOf(c)),
         h(
           'div',
           { className: 'daw-meters' },
@@ -698,10 +815,12 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         h(
           'div',
           { className: 'daw-card-f' },
-          `轮 ${c.totals.runs} · ${money(c.totals.cny)} · 门禁 ${c.gates.done}/${c.gates.total}${c.blockers ? ` · 阻碍 ${c.blockers}` : ''}${c.nextAt && c.status !== 'running' ? ` · 下轮 ${ft(c.nextAt)}` : ''}`,
+          '轮 ' + c.totals.runs + ' · ' + money(c.totals.cny) + ' · 门禁 ' + c.gates.done + '/' + c.gates.total +
+            (c.blockers ? ' · 阻碍 ' + c.blockers : '') +
+            (c.nextAt && c.statusKey !== 'running' ? ' · 下轮 ' + ft(c.nextAt) : ''),
         ),
         c.topBlocker
-          ? h('div', { className: 'daw-card-b' }, `${c.topBlocker.severity === 'error' ? '✕' : c.topBlocker.severity === 'warn' ? '!' : 'i'} ${c.topBlocker.text}`)
+          ? h('div', { className: 'daw-card-b' }, sevIcon(c.topBlocker.severity) + ' ' + c.topBlocker.text)
           : null,
         c.error ? h('div', { className: 'daw-card-b' }, c.error) : null,
       );
@@ -720,234 +839,491 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           h(Kpi, { k: '在跑', v: `${sum.running || 0} / ${sum.total || 0}`, note: `今日 ${sum.todayRuns || 0} 轮 · ${money(sum.todayCny)}` }),
           h(Kpi, { k: '累计', v: `${sum.totalRuns || 0} 轮`, note: money(sum.totalCny) }),
           h(Kpi, { k: '需人工', v: String(sum.human || 0), note: `阻碍 ${sum.blocked || 0} 条` }),
+          h(Kpi, { k: '等回件', v: String(sum.waiting || 0), note: sum.review ? `${sum.review} 条流水线在等审核` : '没有在途审稿' }),
         ),
         (all.pipelines || []).length
           ? h('div', { className: 'daw-cards' }, all.pipelines.map((c) => h(PipeCard, { key: c.id || c.name, card: c, onPick: props.onPick })))
           : h('div', { className: 'daw-empty' }, '还没有登记任何 ARIS 流水线。'),
         (all.errors || []).length ? h('div', { className: 'daw-note' }, all.errors.map((e) => `${e.name}: ${e.error}`).join('；')) : null,
-        h('div', { className: 'daw-note' }, '只读：数据来自各流水线的 state.json / runtime.json / costs.jsonl / meta.json。点击卡片看单条计划；启停与门禁在 Aris_Dsh 面板。'),
+        h('div', { className: 'daw-note' }, '只读：数据来自各流水线的 state.json / runtime.json / costs.jsonl / meta.json。点卡片进详情，点阶段条定位到那一段；启停与门禁在 Aris_Dsh 面板。'),
       );
     }
 
     function PlanDetail(props) {
       const d = props.detail;
-      const [open, setOpen] = React.useState([]);
+      const [openSec, setOpenSec] = React.useState({ cur: true, stages: true, blocks: true, gates: true });
+      const [openStage, setOpenStage] = React.useState({});
+      const [openGrp, setOpenGrp] = React.useState({});
       const [sel, setSel] = React.useState('');
+      const [log, setLog] = React.useState(null);
+      const [toast, setToast] = React.useState('');
+      const timer = React.useRef(0);
 
-      React.useEffect(() => {
-        const stages = (d && d.plan && d.plan.stages) || [];
-        const cur = stages.find((s) => s.status === 'in_progress') || stages.filter((s) => s.status === 'done').slice(-1)[0] || stages[0];
-        if (cur) {
-          setSel(cur.id);
-          setOpen([cur.id]);
+      const stages = (d && d.plan && d.plan.stages) || [];
+      const gates = (d && d.plan && d.plan.gates) || [];
+      const blockers = (d && d.blockers) || [];
+      const curStage =
+        stages.find((s) => s.status === 'in_progress') ||
+        stages.filter((s) => s.status === 'done').slice(-1)[0] ||
+        stages[0] ||
+        null;
+
+      const say = (msg) => {
+        setToast(String(msg || ''));
+        try {
+          clearTimeout(timer.current);
+        } catch (e) {
+          // 忽略
         }
-      }, [d && d.scannedAt]);
+        timer.current = setTimeout(() => setToast(''), 2600);
+      };
+
+      // 进详情时：默认只展开「当前阶段 / 阻碍 / 门禁」，其余收起；
+      // 从概览点阶段条进来时直接定位到那一段（这曾是手册里承诺、代码里没做到的行为）。
+      React.useEffect(() => {
+        if (!d) return;
+        setOpenSec({ cur: true, stages: true, blocks: blockers.length > 0, gates: gates.length > 0 });
+        const focusId = props.focusStage;
+        const target = (focusId && stages.find((s) => s.id === focusId)) || curStage;
+        if (!target) return;
+        setSel(target.id);
+        setOpenStage({ [target.id]: true });
+        setOpenGrp({
+          [target.id + ':plan']: true,
+          [target.id + ':todo']: true,
+          [target.id + ':external']: true,
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [d && d.scannedAt, props.focusStage]);
+
+      // 日志抽屉：走只读的 file 路由读 .aris-run/runs/<runId>/*.log|final.txt。
+      const logRel = log && log.rel;
+      React.useEffect(() => {
+        if (!logRel || !d) return undefined;
+        let alive = true;
+        const name = (d.pipeline && d.pipeline.name) || '';
+        getJson('/api/aris-wiki/file?name=' + encodeURIComponent(name) + '&rel=' + encodeURIComponent(logRel) + '&t=' + Date.now())
+          .then((body) => {
+            if (!alive) return;
+            if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
+            setLog((prev) => ({ ...(prev || {}), rel: logRel, text: String(body.text || ''), busy: false, err: '' }));
+          })
+          .catch((e) => {
+            if (alive) setLog((prev) => ({ ...(prev || {}), rel: logRel, text: '', busy: false, err: String((e && e.message) || e) }));
+          });
+        return () => {
+          alive = false;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [logRel, d && d.pipeline && d.pipeline.name]);
+
+      const copyText = (text) => {
+        const value = String(text || '');
+        if (!value) return Promise.resolve(false);
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(value).then(() => true).catch(() => false);
+          }
+        } catch (e) {
+          // 落到下面的兜底
+        }
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = value;
+          ta.setAttribute('readonly', 'readonly');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand && document.execCommand('copy');
+          ta.remove();
+          return Promise.resolve(!!ok);
+        } catch (e) {
+          return Promise.resolve(false);
+        }
+      };
+
+      const scrollTo = (id) => {
+        try {
+          const el = document.getElementById(id);
+          if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        } catch (e) {
+          // 忽略
+        }
+      };
+
+      const runAction = (action) => {
+        if (!action || !d) return;
+        const paths = d.paths || {};
+        if (action.kind === 'open-log') {
+          const rel = action.logRel || paths.logRel || '';
+          if (!rel) {
+            say('这条阻碍没有可读日志');
+            return;
+          }
+          setLog({ rel, title: action.label || '日志', text: '', busy: true, err: '' });
+          return;
+        }
+        if (action.kind === 'open-gate') {
+          setOpenSec((prev) => ({ ...prev, gates: true }));
+          const gid = action.target || '';
+          setTimeout(() => scrollTo(gid ? 'daw-gate-' + gid : 'daw-sec-gates'), 60);
+          say(gid ? '已展开门禁并定位到 ' + gid : '已展开门禁');
+          return;
+        }
+        if (action.kind === 'open-pipeline') {
+          scrollTo('daw-top');
+          if (curStage) {
+            setSel(curStage.id);
+            setOpenStage({ [curStage.id]: true });
+          }
+          say('已定位到当前阶段');
+          return;
+        }
+        // open-mailbox / open-settings 要跳到 Aris_Dsh 面板，跨面板 API 尚未确定，
+        // 降级：复制路径 + 明确告诉人去哪个面板操作，不做点了没反应的假按钮。
+        const target = action.kind === 'open-mailbox' ? paths.mailbox : paths.settingsFile;
+        copyText(target).then((ok) => say(ok ? '已复制路径，去 Aris_Dsh 面板操作：' + target : '请手动打开：' + target));
+      };
 
       if (props.err) return h('div', { className: 'daw-empty' }, '读取计划失败：' + props.err);
       if (!d) return h('div', { className: 'daw-empty' }, tr('loading'));
 
-      const plan = d.plan || {};
-      const stages = plan.stages || [];
-      const gates = plan.gates || [];
+      const now = d.now || {};
+      const nd = now.nowDoing || {};
+      const pend = now.pending || { count: 0 };
       const doneN = stages.filter((s) => s.status === 'done').length;
       const curN = stages.filter((s) => s.status === 'in_progress').length;
-      const pendN = stages.length - doneN - curN;
 
-      const toggle = (s) => {
-        setSel(s.id);
-        setOpen(open.indexOf(s.id) >= 0 ? open.filter((x) => x !== s.id) : open.concat([s.id]));
-      };
+      const toggleSec = (key) => setOpenSec((prev) => ({ ...prev, [key]: !prev[key] }));
+      const toggleStage = (id) => setOpenStage((prev) => ({ ...prev, [id]: !prev[id] }));
+      const isGrpOpen = (key, fallback) => (openGrp[key] === undefined ? !!fallback : !!openGrp[key]);
+      const toggleGrp = (key, fallback) => setOpenGrp((prev) => ({ ...prev, [key]: !isGrpOpen(key, fallback) }));
 
-      const stageRow = (s, i) => {
-        const isOpen = open.indexOf(s.id) >= 0;
-        const doneItems = s.doneItems || [];
-        const todoItems = s.todoItems || [];
+      const planRow = (it) =>
+        h(
+          'div',
+          { key: 'p' + it.index, className: 'daw-planitem ' + (it.state || 'planned') },
+          h('span', { className: 'daw-ck' }, it.state === 'done' ? '☑' : it.state === 'doing' ? '◐' : '☐'),
+          h('span', { className: 'daw-planitem-t' }, it.text),
+          it.sids && it.sids.length
+            ? h('span', { className: 'daw-planitem-k', title: '对应状态机步骤：' + it.sids.join('、') }, it.sids.length + ' 步')
+            : h('span', { className: 'daw-planitem-k none' }, '未开工'),
+        );
+
+      const stepRow = (it, kind, n) =>
+        h(
+          'div',
+          { key: kind + (it.sid || it.full || n) + n, className: 'daw-step ' + kind },
+          h('span', { className: 'daw-step-n' }, n),
+          it.sid ? h('code', { className: 'daw-step-id' }, it.sid) : null,
+          h('span', { className: 'daw-step-t', title: it.full || it.summary }, it.summary),
+          it.alsoTodo ? h('span', { className: 'daw-step-badge' }, '仍挂在待做') : null,
+          it.outputs && it.outputs.length ? h('span', { className: 'daw-step-o' }, it.outputs.join(' · ')) : null,
+        );
+
+      // 阶段体内按「条件 / 计划项 / 待做 / 等回件 / 已完成」分组，每组都能单独折叠。
+      const stageBody = (s) => {
+        const steps = s.steps || {};
+        const done = steps.done || [];
+        const todo = steps.todo || [];
+        const external = steps.external || [];
         const planItems = s.planItems || [];
+        const pick = (k) => s.id + ':' + k;
+        const grp = (k, label, list, fallback, render) => {
+          if (!list || !list.length) return null;
+          const openGrpNow = isGrpOpen(pick(k), fallback);
+          return h(
+            'div',
+            { className: 'daw-grp' + (openGrpNow ? ' open' : '') },
+            h(
+              'button',
+              { type: 'button', className: 'daw-grp-h', onClick: () => toggleGrp(pick(k), fallback) },
+              h('span', { className: 'daw-sec-x' }, openGrpNow ? '▾' : '▸'),
+              h('b', null, label),
+              h('span', { className: 'daw-sec-n' }, String(list.length)),
+            ),
+            openGrpNow ? render() : null,
+          );
+        };
         return h(
           'div',
-          { key: s.id, className: 'daw-stage' + (s.status === 'in_progress' ? ' cur' : '') + (sel === s.id ? ' sel' : '') },
-          h(
-            'button',
-            { type: 'button', className: 'daw-stage-h', onClick: () => toggle(s) },
-            h('span', { className: 'daw-stage-i' }, String(i + 1).padStart(2, '0')),
-            h('span', { className: 'daw-dot ' + (s.status || 'pending') }),
-            h('b', { className: 'daw-stage-id' }, s.id),
-            h('span', { className: 'daw-stage-t' }, s.title || ''),
-            h('span', { className: 'daw-badge' }, stText(s.status)),
-            h('span', { className: 'daw-stage-n' }, '步骤 ' + doneItems.length + '/' + (doneItems.length + todoItems.length) + ' · 计划项 ' + planItems.length),
-            h('span', { className: 'daw-stage-x' }, isOpen ? '收起' : '展开'),
-          ),
-          isOpen
-            ? h(
-                'div',
-                { className: 'daw-stage-b' },
-                s.enter || s.exit || s.exitNote
-                  ? h(
-                      'div',
-                      { className: 'daw-crit' },
-                      s.enter ? h('div', null, h('i', null, '进入 '), s.enter) : null,
-                      s.exit ? h('div', null, h('i', null, '退出 '), s.exit) : null,
-                      s.exitNote ? h('div', null, h('i', null, '备注 '), s.exitNote) : null,
-                    )
-                  : null,
-                planItems.length
-                  ? h(
-                      'div',
-                      { className: 'daw-steps' },
-                      h('div', { className: 'daw-sub-h' }, '计划工作项（来自 PIPELINE.md）'),
-                      planItems.map((t, k) => h('div', { key: 'p' + k, className: 'daw-planitem' }, h('span', { className: 'daw-ck' }, '☐'), t)),
-                    )
-                  : null,
-                doneItems.length
-                  ? h(
-                      'div',
-                      { className: 'daw-steps' },
-                      h('div', { className: 'daw-sub-h' }, '已完成步骤 ' + doneItems.length),
-                      doneItems.map((it, k) =>
-                        h(
-                          'div',
-                          { key: 'd' + k, className: 'daw-step ok' },
-                          h('span', { className: 'daw-step-n' }, String(i + 1) + '.' + String(k + 1)),
-                          it.sid ? h('code', { className: 'daw-step-id' }, it.sid) : null,
-                          h('span', { className: 'daw-step-t', title: it.full || it.summary }, it.summary),
-                        ),
-                      ),
-                    )
-                  : null,
-                todoItems.length
-                  ? h(
-                      'div',
-                      { className: 'daw-steps' },
-                      h('div', { className: 'daw-sub-h' }, '待做步骤 ' + todoItems.length),
-                      todoItems.map((it, k) =>
-                        h(
-                          'div',
-                          { key: 't' + k, className: 'daw-step todo' },
-                          h('span', { className: 'daw-step-n' }, String(i + 1) + '.' + String(doneItems.length + k + 1)),
-                          it.sid ? h('code', { className: 'daw-step-id' }, it.sid) : null,
-                          h('span', { className: 'daw-step-t', title: it.full || it.summary }, it.summary),
-                          it.outputs && it.outputs.length ? h('span', { className: 'daw-step-o' }, it.outputs.join(' · ')) : null,
-                        ),
-                      ),
-                    )
-                  : null,
-                !planItems.length && !doneItems.length && !todoItems.length ? h('div', { className: 'daw-empty' }, '这个阶段还没有记录。') : null,
+          { className: 'daw-stage-b' },
+          s.enter || s.exit || s.exitNote
+            ? grp(
+                'crit',
+                '进入 / 退出条件',
+                [1],
+                false,
+                () =>
+                  h(
+                    'div',
+                    { className: 'daw-crit' },
+                    s.enter ? h('div', null, h('i', null, '进入 '), s.enter) : null,
+                    s.exit ? h('div', null, h('i', null, '退出 '), s.exit) : null,
+                    s.exitNote ? h('div', null, h('i', null, '备注 '), s.exitNote) : null,
+                  ),
               )
+            : null,
+          grp('plan', '计划项（PIPELINE.md）', planItems, true, () =>
+            h('div', { className: 'daw-steps' }, planItems.map(planRow)),
+          ),
+          grp('todo', '待做（自己能干）', todo, true, () =>
+            h('div', { className: 'daw-steps' }, todo.map((it, k) => stepRow(it, 'todo', String(k + 1)))),
+          ),
+          grp('external', '等外部回件', external, true, () =>
+            h('div', { className: 'daw-steps' }, external.map((it, k) => stepRow(it, 'ext', String(k + 1)))),
+          ),
+          grp('done', '已完成步骤', done, false, () =>
+            h('div', { className: 'daw-steps' }, done.map((it, k) => stepRow(it, 'ok', String(k + 1)))),
+          ),
+          !planItems.length && !done.length && !todo.length && !external.length
+            ? h('div', { className: 'daw-empty' }, '这个阶段还没有记录。')
             : null,
         );
       };
+
+      const stageHead = (s, always) => {
+        const idx = stages.indexOf(s) + 1;
+        const isOpen = always ? openStage[s.id] !== false : !!openStage[s.id];
+        const steps = s.steps || {};
+        const planItems = s.planItems || [];
+        const donePlans = planItems.filter((it) => it.state === 'done').length;
+        return h(
+          'button',
+          {
+            type: 'button',
+            className: 'daw-stage-h' + (s.status === 'in_progress' ? ' cur' : ''),
+            onClick: () => (always ? toggleStage(s.id) : toggleStage(s.id)),
+            'aria-expanded': isOpen,
+          },
+          h('span', { className: 'daw-stage-i' }, String(idx).padStart(2, '0')),
+          h('span', { className: 'daw-dot ' + (s.status || 'pending') }),
+          h('b', { className: 'daw-stage-id' }, s.id),
+          h('span', { className: 'daw-stage-t' }, s.title || ''),
+          h('span', { className: 'daw-badge' }, stText(s.status)),
+          h('span', { className: 'daw-stage-n' }, '计划 ' + donePlans + '/' + planItems.length + ' · 待做 ' + (steps.todo || []).length),
+          h('span', { className: 'daw-stage-x' }, isOpen ? '收起' : '展开'),
+        );
+      };
+
+      const stageBlock = (s, always) => {
+        const isOpen = always ? openStage[s.id] !== false : !!openStage[s.id];
+        return h(
+          'div',
+          { key: s.id, className: 'daw-stage' + (s.status === 'in_progress' ? ' cur' : '') + (sel === s.id ? ' sel' : '') },
+          stageHead(s, always),
+          isOpen ? stageBody(s) : null,
+        );
+      };
+
+      const statusLine = h(
+        'div',
+        { className: 'daw-now' },
+        h(
+          'div',
+          { className: 'daw-now-i' },
+          h('span', { className: 'daw-now-k' }, '状态'),
+          h('span', { className: 'daw-badge ' + stOf(now) }, now.statusLabel || stText(stOf(now))),
+        ),
+        h(
+          'div',
+          { className: 'daw-now-i' },
+          h('span', { className: 'daw-now-k' }, '阶段'),
+          h('span', null, (now.stageIndex || 0) + '/' + (now.stageTotal || 0) + ' · ' + (now.stageTitle || now.stageId || '-') + (now.state ? ' · ' + now.state : '')),
+        ),
+        h(
+          'div',
+          { className: 'daw-now-i wide' },
+          h('span', { className: 'daw-now-k' }, '现在'),
+          h(
+            'span',
+            null,
+            nd.running
+              ? '本轮 ' + ft(nd.startedAt) + ' 起 · 已跑 ' + fmtDur(nd.elapsedMin) + ' · 步数 ' + nd.steps + '/' + (nd.callsMax || '-') + ' · 上下文 ' + pct(nd.ctxPct)
+              : nd.startedAt
+                ? '上一轮 ' + ft(nd.startedAt) + ' 开始，历时 ' + fmtDur(nd.elapsedMin) + ' · 步数 ' + nd.steps + ' · 上下文 ' + pct(nd.ctxPct)
+                : '还没有执行记录',
+          ),
+        ),
+        h(
+          'div',
+          { className: 'daw-now-i' },
+          h('span', { className: 'daw-now-k' }, '回件'),
+          h('span', { className: pend.over ? 'daw-warn-t' : null }, pend.count ? '在途 ' + pend.count + ' 条 · 最久 ' + fmtDur(pend.ageMin) + (pend.over ? ' · 超阈值' : '') : '无在途审稿'),
+        ),
+        h(
+          'div',
+          { className: 'daw-now-i' },
+          h('span', { className: 'daw-now-k' }, '成本'),
+          h(
+            'span',
+            null,
+            '轮 ' + d.totals.runs + ' · ' + money(d.totals.cny) + ' · 今日 ' + d.totals.todayRuns + ' 轮 ' + money(d.totals.todayCny) +
+              (now.nextAt && stOf(now) !== 'running' ? ' · 下轮 ' + ft(now.nextAt) : ''),
+          ),
+        ),
+      );
 
       return h(
         'div',
         { className: 'daw-plan' },
         h(
           'div',
-          { className: 'daw-planhead' },
+          { className: 'daw-planhead', id: 'daw-top' },
           h(
             'div',
             { className: 'daw-planhead-l' },
             h('b', null, d.pipeline.name),
             h('button', { type: 'button', className: 'daw-mini back', onClick: props.onBack }, '← 返回计划列表'),
-            h('span', { className: 'daw-badge' }, stText(d.now && d.now.status)),
-            h('span', { className: 'daw-note-i' }, ((d.now && d.now.state) || '-') + ' · ' + ((d.now && d.now.runId) ? String(d.now.runId).slice(-13) : '未运行')),
+            d.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
           ),
           h(
             'div',
             { className: 'daw-planhead-r' },
-            h('span', null, '轮 ' + d.totals.runs + ' · ' + money(d.totals.cny) + ' · 今日 ' + d.totals.todayRuns + ' 轮'),
-            d.now && d.now.nextAt ? h('span', null, '下轮 ' + ft(d.now.nextAt)) : null,
-            d.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+            h('span', { className: 'daw-note-i' }, 'runId ' + (now.runId || '未运行') + (now.pid ? ' · pid ' + now.pid : '')),
           ),
         ),
+        statusLine,
         h(
           'div',
-          { className: 'daw-legend' },
-          '共 ' + stages.length + ' 个阶段（完成 ' + doneN + ' · 进行 ' + curN + ' · 待做 ' + pendN + '）。步骤 = 阶段内的执行记录，编号「阶段序号.步序」；带 Sxx.y 编号的步骤来自状态机打卡，计划工作项来自 PIPELINE.md。',
+          { className: 'daw-secbar' },
+          h('button', { type: 'button', className: 'daw-mini', onClick: () => setOpenSec({ cur: true, stages: true, blocks: true, gates: true, timeline: true, hist: true }) }, '展开全部'),
+          h('button', { type: 'button', className: 'daw-mini', onClick: () => setOpenSec({}) }, '全部收起'),
+          h('span', { className: 'daw-note-i' }, '共 ' + stages.length + ' 阶段（完成 ' + doneN + ' · 进行 ' + curN + ' · 未开始 ' + (stages.length - doneN - curN) + '）'),
         ),
-        h(Rail, {
-          stages,
-          activeId: sel,
-          onPick: (s) => {
-            setSel(s.id);
-            setOpen([s.id]);
+        h(
+          Section,
+          {
+            title: '当前阶段',
+            brief: curStage ? curStage.id + ' · ' + (curStage.title || '') : '没有阶段数据',
+            open: !!openSec.cur,
+            onToggle: () => toggleSec('cur'),
+            id: 'daw-sec-cur',
           },
-        }),
-        gates.length
-          ? h(
-              'div',
-              { className: 'daw-gates' },
-              gates.map((g) =>
-                h(
-                  'div',
-                  { key: g.id, className: 'daw-gate ' + (g.status === 'fail' ? 'fail' : g.status === 'pending' ? 'pending' : '') },
-                  h(
-                    'div',
-                    { className: 'daw-gate-h' },
-                    h('b', null, g.id),
-                    h('span', { className: 'daw-badge' }, g.status === 'done' ? '已裁' : g.status === 'pending' ? '待做' : g.status),
-                    g.decision ? h('span', { className: 'daw-badge' }, String(g.decision)) : null,
-                  ),
-                  h('div', { className: 'daw-gate-c' }, g.criteria || ''),
-                  g.observed ? h('div', { className: 'daw-gate-o' }, typeof g.observed === 'string' ? g.observed : JSON.stringify(g.observed)) : null,
-                ),
-              ),
-            )
-          : null,
-        h(
-          'div',
-          { className: 'daw-sech' },
-          h('b', null, '总计划'),
-          h('span', { className: 'daw-note-i' }, '点任意阶段展开它的进入/退出条件、计划项与步骤'),
-          h('button', { type: 'button', className: 'daw-mini', onClick: () => setOpen(open.length ? [] : stages.map((s) => s.id)) }, open.length ? '收起全部' : '展开全部'),
+          curStage ? h('div', { className: 'daw-stages' }, stageBlock(curStage, true)) : h('div', { className: 'daw-empty' }, '没有阶段数据'),
         ),
-        h('div', { className: 'daw-stages' }, stages.map(stageRow)),
-        (d.blockers || []).length
-          ? h(
-              'div',
-              { className: 'daw-blocks' },
-              h('div', { className: 'daw-sub-h' }, '阻碍 ' + d.blockers.length),
-              d.blockers.map((b, i) =>
-                h(
-                  'div',
-                  { key: 'b' + i, className: 'daw-block ' + b.severity },
+        h(
+          Section,
+          {
+            title: '阻碍',
+            count: blockers.length,
+            brief: blockers.length ? (blockers.filter((b) => b.human).length ? '其中 ' + blockers.filter((b) => b.human).length + ' 条需人工' : '都不需要人') : '没有阻碍',
+            open: !!openSec.blocks,
+            onToggle: () => toggleSec('blocks'),
+            id: 'daw-sec-blocks',
+          },
+          blockers.length
+            ? h(
+                'div',
+                { className: 'daw-blocks' },
+                blockers.map((b, i) =>
                   h(
                     'div',
-                    { className: 'daw-block-t' },
-                    h('div', null, b.kind + (b.human ? ' · 需人工' : '') + '：' + b.text),
-                    b.evidence ? h('div', { className: 'daw-block-e' }, b.evidence) : null,
+                    { key: 'b' + i, className: 'daw-block ' + b.severity },
+                    h(
+                      'div',
+                      { className: 'daw-block-t' },
+                      h('div', null, h('span', { className: 'daw-block-k' }, sevIcon(b.severity) + ' ' + b.kind + (b.human ? ' · 需人工' : '')), '：' + b.text),
+                      b.evidence ? h('div', { className: 'daw-block-e' }, b.evidence) : null,
+                    ),
+                    b.action ? h(ActionBtn, { action: b.action, onRun: runAction }) : null,
                   ),
-                  b.action ? h('span', { className: 'daw-badge' }, b.action.label) : null,
                 ),
-              ),
-            )
-          : null,
-        (d.timeline || []).length
-          ? h(
-              'div',
-              { className: 'daw-tl' },
-              h('div', { className: 'daw-sub-h' }, '进展时间线 ' + d.timeline.length + ' 条 · 轮次 / 审查回件 / 门禁裁决，按时间倒序'),
-              d.timeline.map((it, i) =>
-                h(
-                  'div',
-                  { key: 'tl' + i, className: 'daw-tl-row ' + (it.severity || '') },
+              )
+            : h('div', { className: 'daw-empty' }, '没有阻碍。'),
+        ),
+        h(
+          Section,
+          {
+            title: '门禁',
+            count: gates.length,
+            brief: gates.filter((g) => g.status === 'done').length + ' 已裁 · ' + gates.filter((g) => g.status === 'pending').length + ' 待做',
+            open: !!openSec.gates,
+            onToggle: () => toggleSec('gates'),
+            id: 'daw-sec-gates',
+          },
+          gates.length
+            ? h(
+                'div',
+                { className: 'daw-gates' },
+                gates.map((g) =>
                   h(
                     'div',
-                    { className: 'daw-tl-h' },
-                    h('span', { className: 'daw-tl-t' }, ft(it.at)),
-                    h('span', { className: 'daw-tl-k ' + (it.kind || '') }, it.kind === 'run' ? '轮次' : it.kind === 'review' ? '审查' : it.kind === 'gate' ? '门禁' : (it.kind || '-')),
-                    h('span', { className: 'daw-tl-x' }, it.text),
+                    {
+                      key: g.id,
+                      id: 'daw-gate-' + g.id,
+                      className: 'daw-gate ' + (g.status === 'fail' ? 'fail' : g.status === 'pending' ? 'pending' : ''),
+                    },
+                    h(
+                      'div',
+                      { className: 'daw-gate-h' },
+                      h('b', null, g.id),
+                      h('span', { className: 'daw-badge' }, g.status === 'done' ? '已裁' : g.status === 'pending' ? '待做' : g.status),
+                      g.decision ? h('span', { className: 'daw-badge' }, String(g.decision)) : null,
+                    ),
+                    h('div', { className: 'daw-gate-c' }, g.criteria || ''),
+                    g.observed ? h('div', { className: 'daw-gate-o' }, typeof g.observed === 'string' ? g.observed : JSON.stringify(g.observed)) : null,
                   ),
-                  it.detail ? h('div', { className: 'daw-tl-d', title: it.detail }, it.detail) : null,
                 ),
-              ),
-            )
-          : null,
-        (d.history || []).length
-          ? h(
-              'div',
-              { className: 'daw-hist' },
-              h('div', { className: 'daw-sub-h' }, '最近 ' + Math.min(8, d.history.length) + ' 轮执行'),
-              h(
+              )
+            : h('div', { className: 'daw-empty' }, '这条流水线没有登记门禁。'),
+        ),
+        h(
+          Section,
+          {
+            title: '总计划',
+            count: stages.length,
+            brief: '点阶段标题展开它的条件 / 计划项 / 待做 / 已完成',
+            open: !!openSec.stages,
+            onToggle: () => toggleSec('stages'),
+            id: 'daw-sec-stages',
+          },
+          h('div', { className: 'daw-stages' }, stages.map((s) => stageBlock(s, false))),
+        ),
+        h(
+          Section,
+          {
+            title: '进展时间线',
+            count: (d.timeline || []).length,
+            brief: '轮次 / 审查回件 / 门禁裁决，按时间倒序',
+            open: !!openSec.timeline,
+            onToggle: () => toggleSec('timeline'),
+            id: 'daw-sec-timeline',
+          },
+          (d.timeline || []).length
+            ? h(
+                'div',
+                { className: 'daw-tl' },
+                d.timeline.map((it, i) =>
+                  h(
+                    'div',
+                    { key: 'tl' + i, className: 'daw-tl-row ' + (it.severity || '') },
+                    h(
+                      'div',
+                      { className: 'daw-tl-h' },
+                      h('span', { className: 'daw-tl-t' }, ft(it.at)),
+                      h('span', { className: 'daw-tl-k ' + (it.kind || '') }, it.kind === 'run' ? '轮次' : it.kind === 'review' ? '审查' : it.kind === 'gate' ? '门禁' : it.kind || '-'),
+                      h('span', { className: 'daw-tl-x' }, it.text),
+                    ),
+                    it.detail ? h('div', { className: 'daw-tl-d', title: it.detail }, it.detail) : null,
+                  ),
+                ),
+              )
+            : h('div', { className: 'daw-empty' }, '没有时间线记录。'),
+        ),
+        h(
+          Section,
+          {
+            title: '最近轮次',
+            count: Math.min(8, (d.history || []).length),
+            brief: '每轮步数 / 成本 / 结果',
+            open: !!openSec.hist,
+            onToggle: () => toggleSec('hist'),
+            id: 'daw-sec-hist',
+          },
+          (d.history || []).length
+            ? h(
                 'table',
                 { className: 'daw-tbl' },
                 h('thead', null, h('tr', null, ['轮次', '开始', '步数', '成本', '结果'].map((t) => h('th', { key: t }, t)))),
@@ -958,7 +1334,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
                     h(
                       'tr',
                       { key: it.runId },
-                      h('td', null, String(it.runId).slice(-13)),
+                      h('td', { title: it.runId }, String(it.runId).slice(-13)),
                       h('td', null, ft(it.start)),
                       h('td', null, String(it.steps)),
                       h('td', null, money(it.cny)),
@@ -966,14 +1342,32 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
                     ),
                   ),
                 ),
+              )
+            : h('div', { className: 'daw-empty' }, '还没有执行记录。'),
+        ),
+        log
+          ? h(
+              'div',
+              { className: 'daw-drawer' },
+              h(
+                'div',
+                { className: 'daw-drawer-h' },
+                h('b', null, log.title || '日志'),
+                h('code', { className: 'daw-drawer-r' }, log.rel || ''),
+                h('button', { type: 'button', className: 'daw-mini', onClick: () => setLog(null) }, '关闭'),
               ),
+              log.busy ? h('div', { className: 'daw-empty' }, '正在读取…') : null,
+              log.err ? h('div', { className: 'daw-empty' }, '读取失败：' + log.err) : null,
+              !log.busy && !log.err ? h('pre', { className: 'daw-pre' }, log.text || '（空文件）') : null,
             )
           : null,
+        toast ? h('div', { className: 'daw-toast' }, toast) : null,
       );
     }
 
     function PlanTab(props) {
       const [sel, setSel] = React.useState('');
+      const [focus, setFocus] = React.useState('');
       const [detail, setDetail] = React.useState(null);
       const [err, setErr] = React.useState('');
 
@@ -998,8 +1392,8 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         };
       }, [sel]);
 
-      if (!sel) return h(PlanOverview, { planAll: props.planAll, onPick: (n) => setSel(n) });
-      return h('div', { className: 'daw-cards', style: { gridTemplateColumns: '1fr' } }, h(PlanDetail, { detail, err, onBack: () => setSel('') }));
+      if (!sel) return h(PlanOverview, { planAll: props.planAll, onPick: (n, stage) => { setSel(n); setFocus(stage || ''); } });
+      return h('div', { className: 'daw-cards', style: { gridTemplateColumns: '1fr' } }, h(PlanDetail, { detail, err, focusStage: focus, onBack: () => { setSel(''); setFocus(''); } }));
     }
 
     function ArtsTab(props) {

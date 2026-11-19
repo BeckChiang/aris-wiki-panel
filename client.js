@@ -1200,8 +1200,8 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
               'div',
               { className: 'daw-st' },
               h('span', { className: 'daw-dot ' + dotCls(st) }),
-              h('span', null, c.statusLabel || stText(st)),
-              c.human ? h('span', { className: 'daw-badge human' }, '人工') : null,
+              h('span', { className: 'daw-badge ' + st }, c.statusLabel || stText(st)),
+              c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
             ),
           ),
           h(

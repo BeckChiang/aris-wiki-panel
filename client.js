@@ -500,7 +500,7 @@ body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482;--st-run:
 .daw-badge{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 7px;border-radius:6px;border:0;font-size:11.5px;font-weight:500;white-space:nowrap;background:var(--st-idle-bg);color:var(--st-idle)}
 .daw-badge i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
 .daw-badge.running{background:var(--st-run-bg);color:var(--st-run)}
-.daw-badge.review,.daw-badge.stopping{background:var(--st-warn-bg);color:var(--st-warn)}
+.daw-badge.review,.daw-badge.stopping,.daw-badge.quota{background:var(--st-warn-bg);color:var(--st-warn)}
 .daw-badge.error,.daw-badge.blocked{background:var(--st-err-bg);color:var(--st-err)}
 .daw-badge.idle,.daw-badge.stopped,.daw-badge.paused,.daw-badge.ok{background:var(--st-idle-bg);color:var(--st-idle)}
 .daw-badge.human{background:var(--st-err-bg);color:var(--st-err)}
@@ -779,6 +779,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
       stopping: '停止中',
       review: '等待审核',
       human: '需人工',
+      quota: '等额度',
       idle: '待命',
       paused: '已暂停',
       stopped: '已停止',
@@ -913,7 +914,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
           { className: 'daw-card-h' },
           h('b', null, c.name),
           h('span', { className: 'daw-badge ' + st }, h('i', null), c.statusLabel || stText(st)),
-          c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+          c.human && stOf(c) !== 'human' ? h('span', { className: 'daw-badge human' }, '需人工') : null,
           pend.count ? h('span', { className: 'daw-badge review' }, '等回件 ' + pend.count) : null,
         ),
         h(
@@ -1129,6 +1130,10 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
       const pend = c.pending || { count: 0 };
       const lr = c.lastRun || {};
       if (pend.count) return '在途 ' + pend.count;
+      const rv = c.review || null;
+      if (rv && (rv.verdict || rv.must || rv.should)) {
+        return '上轮 · ' + String(rv.verdict || '未定') + (rv.must || rv.should ? ` · MUST ${rv.must} / SHOULD ${rv.should}` : '');
+      }
       if (lr.verdict) return '上轮运行 · '+String(lr.verdict);
       return '未送审';
     };
@@ -1200,7 +1205,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
               'div',
               { className: 'daw-st' },
               h('span', { className: 'daw-badge ' + st }, h('i', null), c.statusLabel || stText(st)),
-              c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+              c.human && stOf(c) !== 'human' ? h('span', { className: 'daw-badge human' }, '需人工') : null,
             ),
           ),
           h(
@@ -1258,7 +1263,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
                 h('b', null, sel.name),
                 h('span', { className: 'daw-badge' }, sel.driver || 'aris'),
                 h('span', { className: 'daw-badge ' + st }, sel.statusLabel || stText(st)),
-                sel.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+                sel.human && stOf(sel) !== 'human' ? h('span', { className: 'daw-badge human' }, '需人工') : null,
                 h('button', { type: 'button', className: 'daw-mini', onClick: () => props.onOpen(sel.name, 'plan') }, '打开完整计划 →'),
                 h('button', { type: 'button', className: 'daw-mini', onClick: () => props.onOpen(sel.name, 'arts') }, '看产物'),
                 h('button', { type: 'button', className: 'daw-mini', onClick: () => setPick('') }, '收起'),
@@ -1659,7 +1664,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
           h('b', { className: 'daw-sc-n' }, (d.pipeline && d.pipeline.name) || props.name || ''),
           h('span', { className: 'daw-badge' }, (d.pipeline && d.pipeline.driver) || 'aris'),
           h('span', { className: 'daw-badge ' + stOf(now) }, now.statusLabel || stText(stOf(now))),
-          d.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+          d.human && stOf(now) !== 'human' ? h('span', { className: 'daw-badge human' }, '需人工') : null,
           pend.count ? h('span', { className: 'daw-badge review' }, '等回件 ' + pend.count) : null,
           h('span', { className: 'daw-note-i' }, '只读'),
           h('span', { className: 'daw-note-i' }, 'runId ' + (now.runId || '未运行') + (now.pid ? ' · pid ' + now.pid : '')),

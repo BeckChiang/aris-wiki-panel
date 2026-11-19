@@ -1,3 +1,4 @@
+// UI 改版 2026-11：总览表 + 通栏计划页 + 产物左右分栏 + 图表；数据源与只读语义未变
 window.__ModuleLoader__.load({
   id: '@local/aris-wiki',
   factory(require) {
@@ -34,48 +35,54 @@ window.__ModuleLoader__.load({
    子项会退化成 fit-content，卡片就会随内容忽宽忽窄——显式 stretch + width:100%。 */
 div:not(.daw):has(> .daw){display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-width:0;width:100%;min-height:0;height:100%}
 div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-width:0;width:100%;min-height:0;height:100%}
-.daw{padding:18px 18px 14px;margin:0;display:flex;flex-direction:column;gap:10px;flex:1 1 auto;align-self:stretch;width:100%;min-width:0;min-height:0;height:100%;box-sizing:border-box;font-size:13px;line-height:1.65;color:var(--dsw-alias-label-primary,inherit);background:var(--dsw-alias-bg-base,#fff);border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.22));border-radius:16px;box-shadow:0 2px 14px rgba(0,0,0,.06);overflow:hidden}
-.daw h2{margin:0;font-size:16px;font-weight:600;letter-spacing:.01em}
+.daw{padding:0;margin:0;display:flex;flex-direction:column;gap:0;flex:1 1 auto;align-self:stretch;width:100%;min-width:0;min-height:0;height:100%;box-sizing:border-box;font-size:13px;line-height:1.65;color:var(--tx);background:var(--dsw-alias-bg-base,#fff);overflow:hidden}
+.daw{--tx:#111318;--tx2:#5a6270;--tx3:#8b929e;--a:var(--dsw-alias-brand-primary,#2563eb);--a-bg:color-mix(in srgb,var(--dsw-alias-brand-primary,#2563eb) 11%,transparent);--ln:rgba(127,127,127,.20)}
+body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482}
+.daw h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--tx)}
 .daw h3{margin:0;font-size:14px;font-weight:600}
-.daw-sub{margin:2px 0 0;font-size:12.5px;opacity:.62}
-.daw-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;padding:0 4px 10px;border-bottom:1px solid rgba(127,127,127,.18)}
+.daw-sub{margin:3px 0 0;font-size:11.5px;color:var(--tx3)}
+.daw-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;padding:14px 20px 12px;flex:none;border-bottom:1px solid var(--ln)}
 .daw-head>div:first-child{flex:1 1 auto;min-width:220px}
-.daw-btn{cursor:pointer;border-radius:8px;border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit;font:inherit;font-size:12.5px;line-height:20px;padding:3px 12px}
-.daw-btn:hover:not(:disabled){border-color:rgba(127,127,127,.65);background:rgba(127,127,127,.08)}
+.daw-btn{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;height:28px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,#dcdfe5);background:var(--dsw-alias-bg-base,#fff);color:var(--tx2);font:inherit;font-size:12px;line-height:1;padding:0 10px;white-space:nowrap}
+.daw-btn:hover:not(:disabled){border-color:#c8cdd6;background:var(--dsw-alias-bg-base,#fff);color:var(--tx)}
 .daw-btn:disabled{opacity:.5;cursor:default}
-.daw-stats{font-size:12px;opacity:.72;padding:0 4px;font-variant-numeric:tabular-nums}
-.daw-ctrl{display:flex;flex-direction:column;gap:8px;padding:0 4px}
-.daw-search{width:100%;box-sizing:border-box;font:inherit;font-size:13px;line-height:22px;padding:5px 10px;border-radius:8px;border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit;outline:none}
+.daw-stats{font-size:11.5px;color:var(--tx3);padding:0;font-variant-numeric:tabular-nums}
+.daw-ctrl{display:flex;flex-direction:column;gap:8px;padding:0}
+.daw-search{width:100%;box-sizing:border-box;font:inherit;font-size:13px;line-height:22px;padding:5px 10px;border-radius:8px;border:1px solid rgba(127,127,127,.4);background:transparent;color:var(--tx3);outline:none}
 .daw-search:focus{border-color:rgba(127,127,127,.75)}
 .daw-chips{display:flex;gap:6px;flex-wrap:wrap}
-.daw-chip{cursor:pointer;border-radius:999px;border:1px solid rgba(127,127,127,.35);background:transparent;color:inherit;font:inherit;font-size:12px;line-height:18px;padding:2px 10px}
+.daw-chip{cursor:pointer;border-radius:999px;border:1px solid var(--ln);background:var(--dsw-alias-bg-base,#fff);color:var(--tx2);font:inherit;font-size:11.5px;line-height:22px;padding:0 9px;height:24px;display:inline-flex;align-items:center}
 .daw-chip:hover{border-color:rgba(127,127,127,.6)}
-.daw-chip.on{border-color:rgba(127,127,127,.75);background:rgba(127,127,127,.16);font-weight:600}
+.daw-chip.on{border-color:color-mix(in srgb,var(--a) 35%,transparent);background:var(--a-bg);color:var(--a);font-weight:600}
 .daw-docs{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:10px}
 .daw-split{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(280px,38%) 1fr;gap:12px}
 .daw-list,.daw-reader{min-height:0;overflow-y:auto;overscroll-behavior:contain}
 .daw-list{display:flex;flex-direction:column;gap:8px;padding:2px}
-.daw-tabs{display:flex;gap:4px;flex-wrap:wrap;align-items:flex-end;border-bottom:1px solid rgba(127,127,127,.22);margin:6px 0 10px}
-.daw-tab{font:inherit;font-size:12.5px;color:inherit;background:transparent;border:1px solid transparent;border-bottom:0;border-radius:8px 8px 0 0;padding:6px 10px;cursor:pointer;display:flex;gap:6px;align-items:center;opacity:.68;margin-bottom:-1px}
-.daw-tab:hover{opacity:1}
-.daw-tab.on{opacity:1;font-weight:600;border-color:rgba(127,127,127,.28);background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.08))}
-.daw-tab-n{font-size:11px;opacity:.62;font-variant-numeric:tabular-nums}
-.daw-sec{font-size:11.5px;font-weight:600;letter-spacing:.02em;opacity:.62;padding:6px 2px 0;border-top:1px solid rgba(127,127,127,.18);margin-top:4px}
+.daw-tabs{display:flex;gap:2px;padding:0 14px;border-bottom:1px solid var(--ln);margin:0;flex:none;overflow-x:auto}
+.daw-body{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px 40px}
+.daw-body:has(.daw-docs){display:flex;flex-direction:column;overflow:hidden}
+.daw-body:has(.daw-docs)>*{flex:1 1 auto;min-height:0}
+.daw-tab{font:inherit;font-size:12.5px;color:var(--tx2);background:none;border:0;border-bottom:2px solid transparent;padding:9px 12px 10px;cursor:pointer;display:flex;gap:6px;align-items:center;margin-bottom:-1px;white-space:nowrap}
+.daw-tab:hover{color:var(--tx)}
+.daw-tab.on{color:var(--tx);font-weight:600;border-bottom-color:var(--a);background:none}
+.daw-tab-n{font-size:10.5px;font-weight:500;color:var(--tx3);background:rgba(127,127,127,.12);border-radius:20px;padding:0 5px;min-width:16px;text-align:center;font-variant-numeric:tabular-nums}
+.daw-tab.on .daw-tab-n{color:var(--a);background:var(--a-bg)}
+.daw-sec{font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--tx2);padding:8px 0 0;border-top:1px solid var(--ln);margin-top:4px}
 .daw-sec:first-child{border-top:0;margin-top:0;padding-top:0}
-.daw-item{text-align:left;font:inherit;color:inherit;cursor:pointer;border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.22));border-radius:10px;padding:8px 10px;background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.05))}
+.daw-item{text-align:left;font:inherit;color:var(--tx2);cursor:pointer;border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.22));border-radius:10px;padding:8px 10px;background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.05))}
 .daw-item:hover{border-color:rgba(127,127,127,.5)}
 .daw-item.on{border-color:rgba(127,127,127,.7);background:rgba(127,127,127,.13)}
-.daw-item-t{font-size:13px;font-weight:600;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.daw-item-m{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:3px;font-size:11px;opacity:.62;font-variant-numeric:tabular-nums}
-.daw-tag{border:1px solid rgba(127,127,127,.35);border-radius:5px;padding:0 5px;font-size:10.5px;white-space:nowrap}
+.daw-item-t{font-size:13px;font-weight:600;color:var(--tx);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.daw-item-m{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:3px;font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.daw-tag{border:1px solid rgba(127,127,127,.35);border-radius:5px;padding:0 5px;font-size:10.5px;white-space:nowrap;color:var(--tx2)}
 .daw-rel{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
-.daw-item-x{margin-top:5px;font-size:12px;opacity:.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.daw-item-x{margin-top:5px;font-size:12px;color:var(--tx2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .daw-reader{padding:2px 2px 2px 12px;border-left:1px solid rgba(127,127,127,.18)}
 .daw-reader-h{padding:0 0 10px;margin-bottom:10px;border-bottom:1px solid rgba(127,127,127,.18)}
-.daw-path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;opacity:.6;word-break:break-all;margin-top:2px}
-.daw-meta{font-size:11px;opacity:.55;margin-top:3px}
-.daw-note{margin:0 0 10px;padding:6px 10px;border-radius:8px;border:1px dashed rgba(127,127,127,.45);font-size:12px;opacity:.85}
-.daw-empty{display:flex;align-items:center;justify-content:center;min-height:160px;height:100%;padding:24px;text-align:center;font-size:12.5px;opacity:.6;border:1px dashed rgba(127,127,127,.3);border-radius:10px}
+.daw-path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--tx3);word-break:break-all;margin-top:2px}
+.daw-meta{font-size:11px;color:var(--tx3);margin-top:3px}
+.daw-note{margin:0 0 10px;padding:6px 10px;border-radius:8px;border:1px dashed rgba(127,127,127,.45);font-size:12px;color:var(--tx2)}
+.daw-empty{display:flex;align-items:center;justify-content:center;min-height:160px;height:100%;padding:24px;text-align:center;font-size:12.5px;color:var(--tx3);border:1px dashed rgba(127,127,127,.3);border-radius:10px}
 .daw-err{margin:0 4px;padding:8px 12px;border-radius:8px;border:1px solid color-mix(in srgb,var(--dsw-alias-state-error-primary,#b42318) 45%,transparent);font-size:12.5px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .daw-md{font-size:13px;line-height:1.7;word-break:break-word}
 .daw-md h1,.daw-md h2,.daw-md h3,.daw-md h4{margin:18px 0 8px;line-height:1.35;font-weight:600}
@@ -258,12 +265,12 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       return nodes.length ? nodes : [h('p', { key: 'md-empty', className: 'daw-path' }, '（正文为空）')];
     }
 
-    function DocsPanel() {
+    function DocsPanel(props) {
       const [items, setItems] = React.useState(null);
       const [err, setErr] = React.useState('');
       const [busy, setBusy] = React.useState(false);
       const [q, setQ] = React.useState('');
-      const [group, setGroup] = React.useState('all');
+      const [group, setGroup] = React.useState(props.initial || 'all');
       const [kindKey, setKindKey] = React.useState('all');
       const [sel, setSel] = React.useState('');
       const [doc, setDoc] = React.useState(null);
@@ -327,9 +334,10 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         }
         return [...map.values()].sort((a, b) => b.n - a.n || a.label.localeCompare(b.label));
       }, [list]);
+      const legacyKey=group.startsWith('project:') && props.label ? 'src:'+props.label : '';
       const inPipe = React.useMemo(
-        () => list.filter((it) => group === 'all' || pipeKey(it) === group),
-        [list, group],
+        () => list.filter((it) => group === 'all' || pipeKey(it) === group || pipeKey(it) === legacyKey),
+        [list, group, legacyKey],
       );
       const kinds = React.useMemo(() => {
         const map = new Map();
@@ -380,17 +388,14 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       else if (!items) listBody = h('div', { className: 'daw-empty' }, tr('loading'));
       else if (!list.length) listBody = h('div', { className: 'daw-empty' }, tr('empty'));
       else if (!filtered.length) listBody = h('div', { className: 'daw-empty' }, `${tr('noMatch')}${needle ? `（关键词「${q.trim()}」）` : ''}`);
-      else if (kindKey === 'all' && kinds.length > 1) {
-        // 未筛类型时按文件种类分节，节内仍按时间倒序
-        const nodes = [];
-        for (const [k, n] of kinds) {
-          const its = filtered.filter((it) => it.group === k);
-          if (!its.length) continue;
-          nodes.push(h('div', { key: `sec-${k}`, className: 'daw-sec' }, `${GLABEL[k] || k} · ${n}`));
-          for (const it of its) nodes.push(row(it));
-        }
-        listBody = nodes;
-      } else listBody = filtered.map(row);
+      else listBody = pipes.map((pipe) => {
+        const docs = filtered.filter((item) => pipeKey(item) === pipe.key);
+        if (!docs.length) return null;
+        return h('details', { key:pipe.key, open:true },
+          h('summary', null, pipe.label+' · '+docs.length),
+          Array.from(new Set(docs.map((item)=>item.group))).map((kind)=>h('details',{key:kind,open:true},
+            h('summary',null,GLABEL[kind]||kind),docs.filter((item)=>item.group===kind).map(row))));
+      });
 
       let reader;
       if (docBusy) reader = h('div', { className: 'daw-empty' }, '正在读取正文…');
@@ -401,7 +406,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           h('div', null, `读取失败：${docErr}`),
           h('button', { className: 'daw-btn', type: 'button', style: { marginTop: 10 }, onClick: () => open(sel) }, '重试'),
         );
-      else if (doc)
+      else if (doc && filtered.some((it)=>it.id===sel))
         reader = h(
           'div',
           null,
@@ -430,18 +435,12 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           h('button', { className: 'daw-btn', type: 'button', disabled: busy, onClick: () => load(true) }, busy ? '刷新中…' : tr('refresh')),
         ),
         stats.length ? h('div', { className: 'daw-stats' }, stats.join(' · ')) : null,
-        h(
-          'div',
-          { className: 'daw-tabs' },
-          chips.map(([key, label, count]) =>
-            h(
-              'button',
-              { key, type: 'button', className: `daw-tab${group === key ? ' on' : ''}`, onClick: () => { setGroup(key); setKindKey('all'); } },
-              h('span', null, label),
-              h('span', { className: 'daw-tab-n' }, String(count)),
-            ),
-          ),
-        ),
+        h('label', {className:'daw-scope'}, '文档范围　',
+          h('select',{value:group,onChange:(e)=>{
+            const key=e.target.value;
+            seq.current++;setDoc(null);setSel('');setDocBusy(false);setDocErr('');
+            setGroup(key);setKindKey('all');props.onScope(key);
+          }},chips.concat(chips.some(([id])=>id===group)?[]:[[group,props.label||group,0]]).map(([key,label,count])=>h('option',{key,value:key},label+' · '+count)))),
         h(
           'div',
           { className: 'daw-ctrl' },
@@ -484,16 +483,16 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-sel{font:inherit;font-size:12.5px;line-height:22px;padding:2px 8px;border-radius:8px;border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit;outline:none;max-width:220px}
 .daw-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:2px 4px}
 .daw-kpi{border:1px solid rgba(127,127,127,.18);border-radius:12px;padding:10px 12px}
-.daw-kpi-k{font-size:11.5px;opacity:.6}
-.daw-kpi-v{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.5}
-.daw-kpi-n{font-size:11px;opacity:.55;font-variant-numeric:tabular-nums}
+.daw-kpi-k{font-size:11.5px;color:var(--tx3)}
+.daw-kpi-v{font-size:19px;font-weight:600;color:var(--tx);font-variant-numeric:tabular-nums;line-height:1.5}
+.daw-kpi-n{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
 .daw-cards{flex:1 1 auto;min-height:0;overflow:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:10px;padding:2px 4px 6px;align-content:start}
-.daw-card{text-align:left;font:inherit;color:inherit;background:transparent;cursor:pointer;border:1px solid rgba(127,127,127,.2);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.daw-card{text-align:left;font:inherit;color:var(--tx2);background:transparent;cursor:pointer;border:1px solid rgba(127,127,127,.2);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:7px;min-width:0}
 .daw-card:hover{border-color:rgba(127,127,127,.5);background:rgba(127,127,127,.05)}
 .daw-card.human{border-left:3px solid var(--dsw-alias-state-error-primary,#b42318)}
-.daw-card-h{display:flex;align-items:center;gap:7px;font-size:13px;min-width:0}
+.daw-card-h{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--tx);min-width:0}
 .daw-card-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.daw-card-r{margin-left:auto;font-size:11.5px;opacity:.6;white-space:nowrap;font-variant-numeric:tabular-nums}
+.daw-card-r{margin-left:auto;font-size:11.5px;color:var(--tx3);white-space:nowrap;font-variant-numeric:tabular-nums}
 .daw-dot{width:8px;height:8px;border-radius:50%;background:rgba(127,127,127,.45);flex:0 0 8px}
 .daw-dot.running{background:#0f766e;box-shadow:0 0 0 3px rgba(15,118,110,.18)}
 .daw-dot.error,.daw-dot.blocked{background:#b42318}
@@ -511,22 +510,22 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-meter>i{flex:1 1 auto;height:6px;border-radius:999px;background:rgba(127,127,127,.2);overflow:hidden;display:block}
 .daw-meter>i>b{display:block;height:100%;background:#0f766e}
 .daw-mv{font-variant-numeric:tabular-nums;opacity:.7}
-.daw-card-f{font-size:11.5px;opacity:.66;font-variant-numeric:tabular-nums}
-.daw-card-b{font-size:11.5px;opacity:.8;color:var(--dsw-alias-state-warning-primary,#b26a00);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daw-card-f{font-size:11.5px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.daw-card-b{font-size:11.5px;opacity:.8;color:var(--dsw-alias-state-warn-primary,#b26a00);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .daw-gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:0 4px}
 .daw-gate{border:1px solid rgba(127,127,127,.2);border-radius:10px;padding:8px 10px;min-width:0}
 .daw-gate.pending{border-style:dashed;border-color:rgba(127,127,127,.4)}
 .daw-gate.fail{border-left:3px solid #b42318}
 .daw-gate-h{display:flex;align-items:center;gap:6px;font-size:12.5px}
 .daw-gate-h .daw-badge{margin-left:auto}
-.daw-gate-c{font-size:11.5px;opacity:.7;margin-top:3px;word-break:break-word}
-.daw-gate-o{font-size:11.5px;margin-top:3px;font-variant-numeric:tabular-nums;word-break:break-word}
+.daw-gate-c{font-size:11.5px;color:var(--tx3);margin-top:3px;word-break:break-word}
+.daw-gate-o{font-size:11.5px;color:var(--tx2);margin-top:3px;font-variant-numeric:tabular-nums;word-break:break-word}
 .daw-cols{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 4px 6px}
 .daw-col{min-height:0;display:flex;flex-direction:column;gap:6px;overflow:auto;border:1px solid rgba(127,127,127,.16);border-radius:12px;padding:8px 10px}
-.daw-col-h{font-size:12px;opacity:.62;position:sticky;top:0;background:var(--dsw-alias-bg-base,#fff);padding:2px 0}
+.daw-col-h{font-size:12px;color:var(--tx2);font-weight:600;opacity:1;position:sticky;top:0;background:var(--dsw-alias-bg-base,#fff);padding:2px 0}
 .daw-item2{border-top:1px dashed rgba(127,127,127,.18);padding-top:6px;font-size:12.5px}
 .daw-item2:first-of-type{border-top:0}
-.daw-item2-s{opacity:.62;font-size:11.5px;margin-top:2px;font-variant-numeric:tabular-nums}
+.daw-item2-s{color:var(--tx3);font-size:11.5px;margin-top:2px;font-variant-numeric:tabular-nums}
 .daw-blocks{display:flex;flex-direction:column;gap:6px;padding:0 4px}
 .daw-block{border:1px solid rgba(127,127,127,.2);border-radius:10px;padding:7px 10px;font-size:12.5px;display:flex;gap:8px;align-items:flex-start}
 .daw-block.error{border-left:3px solid #b42318}
@@ -536,10 +535,11 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-block-e{font-size:11px;opacity:.6;font-family:ui-monospace,Menlo,monospace;word-break:break-all;margin-top:2px}
 .daw-tbl{border-collapse:collapse;font-size:12px;width:100%;font-variant-numeric:tabular-nums}
 .daw-tbl th,.daw-tbl td{border-bottom:1px solid rgba(127,127,127,.16);padding:4px 8px;text-align:left;white-space:nowrap}
-.daw-tbl th{opacity:.6;font-weight:500}
+.daw-tbl th{color:var(--tx3);font-weight:500}
+.daw-tbl td{color:var(--tx2)}
 .daw-arts{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(260px,34%) 1fr;gap:12px;padding:0 4px}
 .daw-art-l{min-height:0;overflow:auto;display:flex;flex-direction:column;gap:4px}
-.daw-art-f{text-align:left;font:inherit;color:inherit;background:transparent;border:0;border-top:1px dashed rgba(127,127,127,.16);padding:5px 4px;cursor:pointer;font-size:12.5px;display:flex;gap:8px;align-items:baseline;min-width:0}
+.daw-art-f{text-align:left;font:inherit;color:var(--tx2);background:transparent;border:0;border-top:1px dashed rgba(127,127,127,.16);padding:5px 4px;cursor:pointer;font-size:12.5px;display:flex;gap:8px;align-items:baseline;min-width:0}
 .daw-art-f:hover{background:rgba(127,127,127,.08)}
 .daw-art-f.on{background:rgba(127,127,127,.14);font-weight:600}
 .daw-art-f>span:first-child{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -547,7 +547,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-art-v{min-height:0;overflow:auto;border:1px solid rgba(127,127,127,.16);border-radius:12px;padding:8px 10px}
 .daw-art-img{max-width:100%;display:block;margin:0 auto}
 .daw-main{border:1px solid rgba(127,127,127,.24);border-radius:12px;padding:10px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 4px}
-.daw-main-k{font-size:11.5px;opacity:.6}
+.daw-main-k{font-size:11.5px;color:var(--tx3)}
 .daw-main-n{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
 .daw-main-r{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
 @media (max-width:900px){.daw-cols{grid-template-columns:1fr}.daw-arts{grid-template-columns:1fr}}
@@ -557,25 +557,26 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-seg.on{outline:2px solid currentColor;outline-offset:1px}
 .daw-planhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .daw-planhead-l,.daw-planhead-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.daw-note-i{opacity:.6;font-size:11.5px}
+.daw-note-i{color:var(--tx3);font-size:11.5px}
 .daw-legend{font-size:11.5px;opacity:.65;line-height:1.6}
 .daw-sech{display:flex;align-items:center;gap:8px;margin-top:4px}
 .daw-sech b{font-size:13px}
-.daw-mini{margin-left:auto;font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid rgba(127,127,127,.35);background:transparent;color:inherit;cursor:pointer}
+.daw-mini{margin-left:auto;font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid rgba(127,127,127,.35);background:transparent;color:var(--tx2);cursor:pointer}
 .daw-stages{display:flex;flex-direction:column;gap:4px}
 .daw-stage{border:1px solid rgba(127,127,127,.18);border-radius:8px;overflow:hidden}
 .daw-stage.cur{border-color:rgba(200,120,0,.55)}
 .daw-stage.sel{box-shadow:0 0 0 1px rgba(127,127,127,.25) inset}
-.daw-stage-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:inherit;cursor:pointer;font-size:12px}
-.daw-stage-i{opacity:.5;font-variant-numeric:tabular-nums;font-size:11px}
+.daw-stage-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:var(--tx);cursor:pointer;font-size:12px;font-weight:600}
+.daw-stage-i{color:var(--tx3);font-variant-numeric:tabular-nums;font-size:11px}
 .daw-stage-id{flex:0 0 auto}
-.daw-stage-t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.8}
-.daw-stage-n{opacity:.55;font-size:11px;white-space:nowrap}
-.daw-stage-x{opacity:.5;font-size:11px;white-space:nowrap}
+.daw-stage-t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--tx)}
+.daw-stage-n{color:var(--tx3);font-size:11px;white-space:nowrap}
+.daw-stage-x{color:var(--tx3);font-size:11px;white-space:nowrap}
 .daw-stage-b{padding:8px 12px 10px;display:flex;flex-direction:column;gap:8px}
-.daw-crit{font-size:11.5px;line-height:1.65;opacity:.85;display:flex;flex-direction:column;gap:2px}
+.daw-crit>div{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.daw-crit{font-size:11.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:2px}
 .daw-crit i{opacity:.55;font-style:normal;margin-right:4px}
-.daw-sub-h{font-size:11.5px;opacity:.6;margin-bottom:3px}
+.daw-sub-h{font-size:11.5px;color:var(--tx3);margin-bottom:3px}
 .daw-planitem{display:flex;gap:6px;font-size:12px;line-height:1.6;padding:1px 0}
 .daw-ck{opacity:.45}
 .daw-step{display:flex;gap:6px;align-items:baseline;font-size:12px;line-height:1.6;padding:2px 0;border-top:1px dashed rgba(127,127,127,.14)}
@@ -612,11 +613,11 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-now-i{display:flex;gap:6px;align-items:baseline;min-width:0}
 .daw-now-i.wide{flex:1 1 320px}
 .daw-now-k{font-size:11px;opacity:.55;white-space:nowrap}
-.daw-warn-t{color:var(--dsw-alias-state-warning-primary,#b26a00)}
+.daw-warn-t{color:var(--dsw-alias-state-warn-primary,#b26a00)}
 .daw-secbar{display:flex;align-items:center;gap:6px;margin:2px 0}
 .daw-secbar .daw-mini{margin-left:0}
 .daw-sec{border:1px solid rgba(127,127,127,.18);border-radius:10px;overflow:hidden}
-.daw-sec-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:inherit;cursor:pointer;font-size:12.5px}
+.daw-sec-h{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border:0;background:rgba(127,127,127,.05);color:var(--tx2);cursor:pointer;font-size:12.5px}
 .daw-sec-h:hover{background:rgba(127,127,127,.1)}
 .daw-sec-x{opacity:.6;width:10px;flex:0 0 10px}
 .daw-sec-t{flex:0 0 auto}
@@ -625,19 +626,19 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-sec-body{padding:8px 10px 10px;display:flex;flex-direction:column;gap:6px}
 .daw-grp{border-top:1px dashed rgba(127,127,127,.16);padding-top:4px}
 .daw-grp:first-child{border-top:0;padding-top:0}
-.daw-grp-h{display:flex;align-items:center;gap:7px;width:100%;text-align:left;border:0;background:transparent;color:inherit;cursor:pointer;font-size:11.5px;opacity:.85;padding:3px 0}
+.daw-grp-h{display:flex;align-items:center;gap:7px;width:100%;text-align:left;border:0;background:transparent;color:var(--tx2);cursor:pointer;font-size:11.5px;padding:3px 0}
 .daw-grp-h:hover{opacity:1}
 .daw-steps{display:flex;flex-direction:column;gap:1px;padding:2px 0 2px 14px}
 .daw-stage-h.cur{background:rgba(200,120,0,.08)}
-.daw-step.ext .daw-step-t{color:var(--dsw-alias-state-warning-primary,#b26a00)}
+.daw-step.ext .daw-step-t{color:var(--dsw-alias-state-warn-primary,#b26a00)}
 .daw-step-badge{flex:0 0 auto;font-size:10px;padding:0 5px;border-radius:4px;border:1px solid rgba(127,127,127,.35);opacity:.75}
 .daw-planitem-t{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .daw-planitem-k{flex:0 0 auto;font-size:10.5px;opacity:.55;font-variant-numeric:tabular-nums}
 .daw-planitem-k.none{opacity:.35}
 .daw-planitem.done .daw-planitem-k{color:#0f766e;opacity:.9}
 .daw-planitem.done .daw-planitem-t{opacity:.75}
-.daw-planitem.doing .daw-ck{color:var(--dsw-alias-state-warning-primary,#b26a00);opacity:1}
-.daw-act{flex:0 0 auto;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid rgba(127,127,127,.45);background:transparent;color:inherit;cursor:pointer;white-space:nowrap}
+.daw-planitem.doing .daw-ck{color:var(--dsw-alias-state-warn-primary,#b26a00);opacity:1}
+.daw-act{flex:0 0 auto;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid rgba(127,127,127,.45);background:transparent;color:var(--tx2);cursor:pointer;white-space:nowrap}
 .daw-act:hover{border-color:currentColor}
 .daw-act.soft{opacity:.8;border-style:dashed}
 .daw-block-k{font-size:10.5px;opacity:.6;font-variant-numeric:tabular-nums}
@@ -650,6 +651,121 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
 .daw-drawer-h .daw-mini{margin-left:auto}
 .daw-pre{margin:0;max-height:320px;overflow:auto;font-size:11.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,Menlo,monospace;background:rgba(127,127,127,.06);border-radius:8px;padding:8px}
 .daw-toast{position:sticky;bottom:0;margin-top:4px;font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(127,127,127,.14);word-break:break-all}
+`;
+    const CSS3 = `/* 2026-11 改版：总览表 / 通栏计划页 / 产物左右分栏 / 纯 CSS+SVG 图表。
+   颜色一律走 rgba(127,127,127,α) 或 color-mix(...,currentColor)：宿主深色主题会把
+   currentColor 翻白，状态色跟着变亮，不必再写一份暗色覆盖；表格底用宿主 bg-base。 */
+.daw{--daw-line:rgba(127,127,127,.2);--daw-fill:rgba(127,127,127,.06);--daw-fill2:rgba(127,127,127,.13);--daw-ok:color-mix(in srgb,#0d9488 76%,currentColor);--daw-run:color-mix(in srgb,#0284c7 76%,currentColor);--daw-warn:color-mix(in srgb,#d97706 80%,currentColor);--daw-err:color-mix(in srgb,#dc2626 74%,currentColor);--daw-idle:rgba(127,127,127,.5)}
+.daw-page{flex:1 1 auto;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:0 4px 8px}
+.daw-stack{display:flex;flex-direction:column;gap:8px;min-width:0}
+.daw-kpis8{grid-template-columns:repeat(auto-fit,minmax(132px,1fr))}
+.daw-kpi-v.ok{color:var(--daw-ok)}.daw-kpi-v.run{color:var(--daw-run)}.daw-kpi-v.warn{color:var(--daw-warn)}.daw-kpi-v.err{color:var(--daw-err)}
+.daw-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.daw-toolbar .daw-search{flex:1 1 200px;width:auto}
+.daw-chip .daw-cn{opacity:.8;margin-left:5px;font-variant-numeric:tabular-nums}
+.daw-tgl{display:flex;border:1px solid rgba(127,127,127,.35);border-radius:999px;overflow:hidden;margin-left:auto}
+.daw-tgl>button{font:inherit;font-size:11.5px;line-height:18px;padding:2px 10px;border:0;background:transparent;color:inherit;cursor:pointer}
+.daw-tgl>button.on{background:rgba(127,127,127,.16);font-weight:600}
+.daw-tblwrap{min-height:0;overflow:auto;border:1px solid var(--daw-line);border-radius:12px}
+.daw-tbl2{border-collapse:separate;border-spacing:0;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+.daw-tbl2 th{position:sticky;top:0;z-index:2;text-align:left;font-weight:500;font-size:11px;color:var(--tx3);padding:6px 8px;white-space:nowrap;border-bottom:1px solid var(--daw-line);background:var(--dsw-alias-bg-base,#fff)}
+.daw-tbl2 td{padding:5px 8px;color:var(--tx2);border-bottom:1px solid rgba(127,127,127,.13);vertical-align:top}
+.daw-tbl2 tbody tr:last-child td{border-bottom:0}
+.daw-tbl2 th:first-child,.daw-tbl2 td:first-child{position:sticky;left:0;z-index:1;background:var(--dsw-alias-bg-base,#fff)}
+.daw-tbl2 th:first-child{z-index:3}
+.daw-tbl2 tbody tr.clk{cursor:pointer}
+.daw-tbl2 tbody tr.clk:hover td{background:var(--daw-fill)}
+.daw-tbl2 tbody tr.on>td{background:var(--daw-fill2)}
+.daw-tbl2 td.wrap{white-space:normal;word-break:break-word;min-width:140px;max-width:420px}
+.daw-cell2{display:flex;flex-direction:column;gap:1px;line-height:1.35;max-width:280px}
+.daw-cell2 small{font-size:10.5px;color:var(--tx3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.daw-st{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.daw-dot.done{background:var(--daw-ok)}
+.daw-dot.in_progress{background:var(--daw-run);box-shadow:0 0 0 3px color-mix(in srgb,var(--daw-run) 22%,transparent)}
+.daw-dot.pending{background:rgba(127,127,127,.32)}
+.daw-dot.review,.daw-dot.human{background:var(--daw-warn)}
+.daw-dot.failed,.daw-dot.error{background:var(--daw-err)}
+.daw-dot.paused,.daw-dot.stopped{background:rgba(127,127,127,.5)}
+.daw-dot.idle{background:rgba(127,127,127,.42)}
+.daw-bnum{display:inline-block;min-width:18px;text-align:center;font-size:11px;line-height:16px;padding:0 5px;border-radius:999px;border:1px solid rgba(127,127,127,.35)}
+.daw-bnum.on{color:var(--daw-err);border-color:color-mix(in srgb,var(--daw-err) 55%,transparent);font-weight:600}
+.daw-rail.wide{height:10px;gap:4px}
+.daw-detail{border:1px solid var(--daw-line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.daw-detail-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+.daw-detail-h .daw-mini{margin-left:0}
+.daw-detail-h .daw-mini:first-of-type{margin-left:auto}
+.daw-sc{border:1px solid var(--daw-line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.daw-sc-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.daw-sc-n{font-size:15px;font-weight:600}
+.daw-sc-h .daw-note-i:last-child{margin-left:auto}
+.daw-sc-kv{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:12px}
+.daw-kv{display:flex;gap:6px;align-items:baseline;min-width:0;max-width:100%}
+.daw-kv>i{font-style:normal;font-size:11px;color:var(--tx3);white-space:nowrap}
+.daw-kv>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.daw-kv.wide{flex:1 1 320px}
+.daw-chartbox{border:1px solid var(--daw-line);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.daw-chartbox-h{display:flex;align-items:center;gap:8px;font-size:11.5px;opacity:.72;flex-wrap:wrap}
+.daw-chartbox-h b{font-size:12px}
+.daw-chart{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px;align-items:stretch}
+.daw-yax{display:flex;flex-direction:column;justify-content:space-between;height:132px;font-size:10px;opacity:.55;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.daw-plot{overflow-x:auto;overflow-y:hidden;height:132px;padding-bottom:2px}
+.daw-plot-in{position:relative;display:flex;align-items:flex-end;gap:4px;height:100%;min-width:100%}
+.daw-bar{flex:0 0 auto;width:var(--bw,14px);height:100%;display:flex;align-items:flex-end;position:relative}
+.daw-bar>i{display:block;width:100%;min-height:2px;border-radius:2px 2px 0 0;background:color-mix(in srgb,var(--daw-run) 62%,transparent)}
+.daw-bar.hi>i{background:color-mix(in srgb,var(--daw-warn) 72%,transparent)}
+.daw-bar:hover>i{background:color-mix(in srgb,var(--daw-run) 92%,transparent)}
+.daw-avg{position:absolute;left:0;right:0;border-top:1px dashed var(--daw-warn);pointer-events:none;z-index:1}
+.daw-avg b{position:absolute;right:0;top:-15px;font-size:10px;font-weight:500;color:var(--daw-warn);white-space:nowrap;background:var(--dsw-alias-bg-base,#fff);padding:0 3px}
+.daw-chart-s{font-size:11px;opacity:.6;font-variant-numeric:tabular-nums}
+.daw-tid{font-family:ui-monospace,Menlo,monospace;font-size:11px;opacity:.7}
+.daw-donut{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.daw-lg{display:flex;flex-direction:column;gap:3px;font-size:11.5px;min-width:140px}
+.daw-lg-i{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.daw-sw{width:9px;height:9px;border-radius:2px;flex:0 0 9px}
+.daw-cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.daw-col.b{max-height:340px}
+.daw-col.b .daw-empty,.daw-stage-b .daw-empty{min-height:0;padding:10px;border:0}
+.daw-split3{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:var(--daw-splitw,360px) 10px minmax(0,1fr)}
+.daw-split3.narrow{grid-template-columns:minmax(0,1fr)}
+.daw-splitbar{position:relative;border:0;background:transparent;padding:0;cursor:col-resize}
+.daw-splitbar:before{content:"";position:absolute;top:0;bottom:0;left:4px;width:2px;border-radius:1px;background:var(--daw-line)}
+.daw-splitbar:hover:before,.daw-splitbar.on:before{background:rgba(127,127,127,.5)}
+.daw-split3.narrow .daw-splitbar{display:none}
+.daw-ftable{min-height:0;overflow:auto;border:1px solid var(--daw-line);border-radius:10px}
+.daw-prev{min-height:0;overflow:auto;border:1px solid var(--daw-line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.daw-prev-h{font-size:13px;font-weight:600;word-break:break-all}
+.daw-prev-m{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.daw-prev-p{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--tx3);word-break:break-all}
+.daw-prev-page{width:100%;max-width:300px;aspect-ratio:3/4;border:1px solid var(--daw-line);border-radius:6px;background:rgba(127,127,127,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:11.5px;opacity:.68;text-align:center;padding:14px}
+.daw-prev-img{max-width:100%;max-height:420px;display:block;border-radius:6px;border:1px solid var(--daw-line)}
+.daw-prev-pdf{flex:1 1 auto;width:100%;min-height:420px;height:min(72vh,680px);border:1px solid var(--daw-line);border-radius:8px;display:block;background:#fff}
+.daw-prev-text{font-family:ui-monospace,Menlo,monospace;font-size:11px;line-height:1.75;background:rgba(127,127,127,.05);border-radius:8px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto;margin:0}
+.daw-prev-f{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px;align-items:center}
+.daw-err2{border:1px solid var(--daw-line);border-left:3px solid var(--daw-err);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:12.5px}
+.daw-err2 pre{margin:0;max-height:160px;overflow:auto;font-size:11px;line-height:1.55;opacity:.7;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,Menlo,monospace}
+@media (max-width:900px){.daw-cols3{grid-template-columns:minmax(0,1fr)}.daw-cell2{max-width:180px}.daw-tgl{margin-left:0}}
+`;
+    const CSS4 = `
+.daw .daw-scope{display:block;padding:7px 14px;color:var(--tx2)}.daw .daw-scope select{min-height:32px;height:auto;line-height:1.5;border:1px solid var(--daw-line);border-radius:7px;color:var(--tx);background:var(--daw-bg,var(--dsw-alias-bg-base));padding:3px 8px}
+body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-scope summary{cursor:pointer;padding:5px;font-weight:600}.daw-list details details{padding-left:10px}
+@media(min-width:901px){.daw .daw-split{display:flex}.daw .daw-list{width:260px;min-width:170px;max-width:62%;resize:horizontal;overflow:auto}.daw .daw-reader{flex:1;min-width:0}}
+
+.daw-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.daw-sub-h{font-size:11px;opacity:.6;margin:6px 0 3px;letter-spacing:.02em}
+.daw-ck{width:12px;flex:0 0 12px;opacity:.7;font-family:ui-monospace,Menlo,monospace}
+.daw-stage-i{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;opacity:.5;margin-right:5px}
+.daw-stage-b{display:flex;flex-direction:column;gap:2px;padding:8px 10px 10px 12px;border-left:2px solid var(--daw-line);margin:2px 0 6px 6px}
+.daw-tl-k{font-size:10.5px;opacity:.6}
+.daw-tl-k.error{color:var(--daw-err)}.daw-tl-k.warn{color:var(--daw-warn)}.daw-tl-k.info{color:var(--tx3)}
+.daw-drawer-r{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;opacity:.55;word-break:break-all;flex:1 1 auto}
+.daw-tbl2 tr.grp>td{background:rgba(127,127,127,.07);font-size:11px;opacity:.85;font-weight:600;padding:4px 8px}
+.daw-tbl2 td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.daw-skel{display:flex;flex-direction:column;gap:7px;padding:4px 0}
+.daw-skel i{display:block;height:8px;border-radius:3px;background:rgba(127,127,127,.16);animation:daw-pulse 1.4s ease-in-out infinite}
+.daw-skel i:nth-child(3n+2){width:88%}.daw-skel i:nth-child(3n){width:72%}.daw-skel i:nth-child(4n){width:94%}
+@keyframes daw-pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.daw-hint{font-size:11px;color:var(--tx3)}
+@media (max-width:900px){.daw-chips{margin-left:0}}
 `;
 
     // 状态词汇与数据层 statusOf() 一致（也等于 dsh 面板 stateOf 的那一套），
@@ -753,7 +869,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         'div',
         { className: 'daw-kpi' },
         h('div', { className: 'daw-kpi-k' }, props.k),
-        h('div', { className: 'daw-kpi-v' }, props.v),
+        h('div', { className: 'daw-kpi-v' + (props.cls ? ' ' + props.cls : '') }, props.v),
         props.note ? h('div', { className: 'daw-kpi-n' }, props.note) : null,
       );
     }
@@ -826,34 +942,427 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       );
     }
 
-    function PlanOverview(props) {
-      const all = props.planAll;
-      if (!all) return h('div', { className: 'daw-empty' }, tr('loading'));
-      const sum = all.summary || {};
+    // ---- 2026-11 新增：图表（纯 HTML+CSS / 纯 SVG，不引第三方库） ----
+    const PALETTE = ['rgba(2,132,199,.85)', 'rgba(13,148,136,.85)', 'rgba(217,119,6,.85)', 'rgba(220,38,38,.8)', 'rgba(124,58,237,.6)', 'rgba(127,127,127,.55)'];
+
+    const moneyShort = (n) => {
+      const v = Number(n) || 0;
+      if (Math.abs(v) >= 100) return '¥' + Math.round(v);
+      return '¥' + v.toFixed(2);
+    };
+
+    // 阶段 id 前缀推导父子层级：S3 → S3.2 → S3.2.1（没有点号的 id 全部算第一层）。
+
+    // 表格/图表里的圆点：把数据层的状态词收敛成 CSS 里定义过的那几个类。
+    const dotCls = (status) => {
+      const k = String(status || '');
+      if (k === 'done') return 'done';
+      if (k === 'in_progress') return 'in_progress';
+      if (k === 'review' || k === 'human') return k;
+      if (k === 'failed' || k === 'error' || k === 'blocked') return 'error';
+      if (k === 'paused' || k === 'stopped') return 'paused';
+      if (k === 'running' || k === 'stopping') return 'running';
+      return 'pending';
+    };
+
+    const kv = (k, v, wide) =>
+      h('div', { className: 'daw-kv' + (wide ? ' wide' : '') }, h('i', null, k), h('span', null, v == null || v === '' ? '—' : String(v)));
+
+    function BarChart(props) {
+      const items = (props.items || []).filter((it) => it && Number.isFinite(Number(it.value)));
+      if (!items.length) return h('div', { className: 'daw-empty' }, props.empty || '没有数据。');
+      const fmt = typeof props.fmt === 'function' ? props.fmt : moneyShort;
+      const vals = items.map((it) => Number(it.value));
+      const total = vals.reduce((a, b) => a + b, 0);
+      const top = Math.max.apply(null, vals);
+      const avg = total / vals.length;
+      const max = Math.max(top, 0.0001);
+      const bw = Math.max(4, Math.min(16, Number(props.barWidth) || 14));
       return h(
         'div',
-        { className: 'daw-plan' },
+        { className: 'daw-chartbox' },
+        h('div', { className: 'daw-chartbox-h' }, h('b', null, props.title || '柱状图'), props.note ? h('span', null, props.note) : null),
         h(
           'div',
-          { className: 'daw-kpis' },
-          h(Kpi, { k: '在跑', v: `${sum.running || 0} / ${sum.total || 0}`, note: `今日 ${sum.todayRuns || 0} 轮 · ${money(sum.todayCny)}` }),
-          h(Kpi, { k: '累计', v: `${sum.totalRuns || 0} 轮`, note: money(sum.totalCny) }),
-          h(Kpi, { k: '需人工', v: String(sum.human || 0), note: `阻碍 ${sum.blocked || 0} 条` }),
-          h(Kpi, { k: '等回件', v: String(sum.waiting || 0), note: sum.review ? `${sum.review} 条流水线在等审核` : '没有在途审稿' }),
+          { className: 'daw-chart' },
+          h('div', { className: 'daw-yax' }, [max, max / 2, 0].map((t, i) => h('span', { key: 'y' + i }, fmt(t)))),
+          h(
+            'div',
+            { className: 'daw-plot' },
+            h(
+              'div',
+              { className: 'daw-plot-in', style: { '--bw': bw + 'px' } },
+              h('i', { className: 'daw-avg', style: { top: 100 - (avg / max) * 100 + '%' } }, h('b', null, '均 ' + fmt(avg))),
+              items.map((it, i) =>
+                h(
+                  'div',
+                  {
+                    key: 'b' + i,
+                    className: 'daw-bar' + (Number(it.value) === top && top > 0 ? ' hi' : ''),
+                    title: (it.title || it.label || '') + '：' + fmt(it.value),
+                  },
+                  h('i', { style: { height: Math.max(2, (Number(it.value) / max) * 100) + '%' } }),
+                ),
+              ),
+            ),
+          ),
         ),
-        (all.pipelines || []).length
-          ? h('div', { className: 'daw-cards' }, all.pipelines.map((c) => h(PipeCard, { key: c.id || c.name, card: c, onPick: props.onPick })))
-          : h('div', { className: 'daw-empty' }, '还没有登记任何 ARIS 流水线。'),
-        (all.errors || []).length ? h('div', { className: 'daw-note' }, all.errors.map((e) => `${e.name}: ${e.error}`).join('；')) : null,
-        h('div', { className: 'daw-note' }, '只读：数据来自各流水线的 state.json / runtime.json / costs.jsonl / meta.json。点卡片进详情，点阶段条定位到那一段；启停与门禁在 Aris_Dsh 面板。'),
+        h(
+          'div',
+          { className: 'daw-chart-s' },
+          '合计 ' + fmt(total) + ' · 均值 ' + fmt(avg) + ' · 最高 ' + fmt(top) + ' · 共 ' + items.length + ' 项',
+        ),
       );
     }
 
+    function Donut(props) {
+      const segs = (props.segs || []).filter((s) => Number(s.value) > 0);
+      if (!segs.length) return h('div', { className: 'daw-note-i' }, '还没有可归集的结论。');
+      const total = segs.reduce((a, s) => a + Number(s.value), 0);
+      const R = 38;
+      const C = 2 * Math.PI * R;
+      let acc = 0;
+      return h(
+        'div',
+        { className: 'daw-donut' },
+        h(
+          'svg',
+          { viewBox: '0 0 100 100', width: 116, height: 116, role: 'img', 'aria-label': props.title || '分布图' },
+          h('circle', { cx: 50, cy: 50, r: R, fill: 'none', stroke: 'rgba(127,127,127,.16)', strokeWidth: 16 }),
+          segs.map((s, i) => {
+            const len = (Number(s.value) / total) * C;
+            const color = s.color || PALETTE[i % PALETTE.length];
+            const arc = h('circle', {
+              key: 'a' + i,
+              cx: 50,
+              cy: 50,
+              r: R,
+              fill: 'none',
+              stroke: color,
+              strokeWidth: 16,
+              strokeDasharray: len + ' ' + (C - len),
+              strokeDashoffset: -acc,
+              transform: 'rotate(-90 50 50)',
+            });
+            acc += len;
+            return arc;
+          }),
+        ),
+        h(
+          'div',
+          { className: 'daw-lg' },
+          segs.map((s, i) =>
+            h(
+              'div',
+              { key: 'l' + i, className: 'daw-lg-i' },
+              h('span', { className: 'daw-sw', style: { background: s.color || PALETTE[i % PALETTE.length] } }),
+              h('span', null, String(s.label)),
+              h('b', null, String(s.value)),
+              h('span', { style: { opacity: 0.55 } }, ' · ' + Math.round((Number(s.value) / total) * 100) + '%'),
+            ),
+          ),
+        ),
+      );
+    }
+
+    // 页签级错误边界：某个页签渲染抛错只废这一块，其余页签照常，且能原地重试。
+    class TabBoundary extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { err: null, seq: 0 };
+        this.retry = this.retry.bind(this);
+      }
+      static getDerivedStateFromError(err) {
+        return { err: err || new Error('渲染失败') };
+      }
+      componentDidCatch(err, info) {
+        try {
+          console.error('[aris-wiki] tab render failed', err, info);
+        } catch (e) {
+          /* 忽略 */
+        }
+      }
+      retry() {
+        this.setState((prev) => ({ err: null, seq: (prev.seq || 0) + 1 }));
+      }
+      render() {
+        if (this.state.err) {
+          const err = this.state.err;
+          return h(
+            'div',
+            { className: 'daw-err2' },
+            h('b', null, '这个页签渲染失败，其余页签不受影响'),
+            this.props.label ? h('div', { className: 'daw-note-i' }, '页签：' + this.props.label) : null,
+            h('pre', null, String((err && (err.stack || err.message)) || err)),
+            h('div', null, h('button', { type: 'button', className: 'daw-btn', onClick: this.retry }, '重试')),
+          );
+        }
+        return h(React.Fragment, { key: this.state.seq }, this.props.children);
+      }
+    }
+
+    const OV_FILTERS = [
+      { key: 'all', label: '全部' },
+      { key: 'running', label: '在跑' },
+      { key: 'human', label: '需人工' },
+      { key: 'stopped', label: '已停止' },
+    ];
+    const STOPPED_KEYS = ['stopped', 'paused', 'error', 'blocked', 'idle', 'done'];
+
+    const verdictSegs = (pipes) => {
+      const map = {};
+      (pipes || []).forEach((c) => {
+        const v = (c.lastRun && c.lastRun.verdict) || '';
+        if (!v) return;
+        map[v] = (map[v] || 0) + 1;
+      });
+      return Object.keys(map)
+        .map((k) => ({ label: k, value: map[k] }))
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 6);
+    };
+
+    const reviewText = (c) => {
+      const pend = c.pending || { count: 0 };
+      const lr = c.lastRun || {};
+      if (pend.count) return '在途 ' + pend.count;
+      if (lr.verdict) return '上轮运行 · '+String(lr.verdict);
+      return '未送审';
+    };
+
+    // 总览：八格 KPI + 筛选 + 一张总表，点行在表格下方展开详情（不是行内展开）。
+    function OverviewTab(props) {
+      const all = props.planAll;
+      const [filter, setFilter] = React.useState('all');
+      const [q, setQ] = React.useState('');
+      const [view, setView] = React.useState('table');
+      const [pick, setPick] = React.useState('');
+      const [results,setResults]=React.useState({});
+      React.useEffect(()=>{
+        if(!all)return;
+        let alive=true;
+        const queue=(all.pipelines||[]).filter((p)=>!props.scope||p.name===props.scope).slice();
+        const read=async()=>{
+          while(alive && queue.length){
+            const p=queue.shift();
+            try{
+              const data=await getJson('/api/aris-wiki/plan?name='+encodeURIComponent(p.name));
+              const event=(data.timeline||[]).filter((e)=>e.kind==='review').sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))[0];
+              if(alive)setResults((prev)=>({...prev,[p.name]:event?String(event.text||'—').replace(/^审查回件\s*·\s*/, '').replace(/\b(accept|revise|reject)\b/g,(k)=>({accept:'通过',revise:'需修改',reject:'退回'})[k]):'—'}));
+            }catch(e){if(alive)setResults((prev)=>({...prev,[p.name]:'读取失败'}))}
+          }
+        };
+        for(let i=0,count=Math.min(3,queue.length);i<count;i++)read();
+        return ()=>{alive=false};
+      },[all,props.scope]);
+      if (!all) return h('div', { className: 'daw-empty' }, tr('loading'));
+      const sum = all.summary || {};
+      const pipes = (all.pipelines || []).filter((p)=>!props.scope||p.name===props.scope);
+      const ql = String(q || '').trim().toLowerCase();
+      const inFilter = (c) => {
+        const k = stOf(c);
+        if (filter === 'running') return k === 'running' || k === 'stopping';
+        if (filter === 'human') return !!c.human;
+        if (filter === 'stopped') return STOPPED_KEYS.indexOf(k) >= 0;
+        return true;
+      };
+      const hit = (c) => {
+        if (!ql) return true;
+        const hay = [c.name, c.id, c.driver, c.statusLabel, c.stageId, c.stageTitle, c.state, c.human ? '需人工' : '', c.topBlocker ? c.topBlocker.text : '']
+          .join(' ')
+          .toLowerCase();
+        return hay.indexOf(ql) >= 0;
+      };
+      const rows = pipes.filter((c) => inFilter(c) && hit(c));
+      const counts = {
+        all: pipes.length,
+        running: pipes.filter((c) => stOf(c) === 'running' || stOf(c) === 'stopping').length,
+        human: pipes.filter((c) => !!c.human).length,
+        stopped: pipes.filter((c) => STOPPED_KEYS.indexOf(stOf(c)) >= 0).length,
+      };
+      const sel = rows.filter((c) => c.name === pick)[0] || null;
+
+      const rowsJsx = rows.map((c) => {
+        const st = stOf(c);
+        const pend = c.pending || { count: 0 };
+        const tot = c.totals || { runs: 0, cny: 0, todayRuns: 0, todayCny: 0 };
+        const on = sel && sel.name === c.name;
+        return h(
+          'tr',
+          { key: c.id || c.name, className: 'clk' + (on ? ' on' : ''), onClick: () => setPick(on ? '' : c.name) },
+          h(
+            'td',
+            null,
+            h(
+              'div',
+              { className: 'daw-st' },
+              h('span', { className: 'daw-dot ' + dotCls(st) }),
+              h('span', null, c.statusLabel || stText(st)),
+              c.human ? h('span', { className: 'daw-badge human' }, '人工') : null,
+            ),
+          ),
+          h(
+            'td',
+            null,
+            h('div', { className: 'daw-cell2' }, h('b', null, c.name), h('small', null, (c.driver || 'aris') + (c.state ? ' · ' + c.state : ''))),
+          ),
+          h(
+            'td',
+            null,
+            h(
+              'div',
+              { className: 'daw-cell2' },
+              h(Rail, { stages: c.stages || [], activeId: c.stageId }),
+              h('small', null, (c.stageIndex || 0) + '/' + (c.stageTotal || 0) + ' · ' + (c.stageTitle || c.stageId || '-')),
+            ),
+          ),
+          h(
+            'td',
+            null,
+            h(
+              'div',
+              { className: 'daw-cell2' },
+              h('span', null, nowLineOf(c)),
+              h('small', null, (c.stageId || '-') + ' · ' + (c.nextAt ? '下轮 ' + ft(c.nextAt) : '无下轮')),
+            ),
+          ),
+          h('td', null, (c.gates ? c.gates.done : 0) + '/' + (c.gates ? c.gates.total : 0)),
+          h('td', null, c.blockers ? h('span', { className: 'daw-bnum on' }, String(c.blockers)) : h('span', { className: 'daw-bnum' }, '0')),
+          h('td', null, reviewText(c),h('div',{className:'daw-note-i'},'最近回件 · '+(results[c.name]||'…'))),
+          h(
+            'td',
+            null,
+            h('div', { className: 'daw-cell2' }, h('span', null, money(tot.todayCny)), h('small', null, '累计 ' + money(tot.cny) + ' · ' + tot.runs + ' 轮')),
+          ),
+          h('td', null, st === 'running' ? '在跑' : c.nextAt ? ft(c.nextAt) : '—'),
+        );
+      });
+
+      const detail = sel
+        ? (() => {
+            const st = stOf(sel);
+            const pend = sel.pending || { count: 0 };
+            const tot = sel.totals || { runs: 0, cny: 0, todayRuns: 0, todayCny: 0 };
+            return h(
+              'div',
+              { className: 'daw-detail' },
+              h(
+                'div',
+                { className: 'daw-detail-h' },
+                h('span', { className: 'daw-dot ' + dotCls(st) }),
+                h('b', null, sel.name),
+                h('span', { className: 'daw-badge' }, sel.driver || 'aris'),
+                h('span', { className: 'daw-badge ' + st }, sel.statusLabel || stText(st)),
+                sel.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+                h('button', { type: 'button', className: 'daw-mini', onClick: () => props.onOpen(sel.name, 'plan') }, '打开完整计划 →'),
+                h('button', { type: 'button', className: 'daw-mini', onClick: () => props.onOpen(sel.name, 'arts') }, '看产物'),
+                h('button', { type: 'button', className: 'daw-mini', onClick: () => setPick('') }, '收起'),
+              ),
+              h(Rail, {
+                stages: sel.stages || [],
+                activeId: sel.stageId,
+                onPick: () => props.onOpen(sel.name, 'plan'),
+              }),
+              h(
+                'div',
+                { className: 'daw-sc-kv' },
+                kv('阶段', (sel.stageIndex || 0) + '/' + (sel.stageTotal || 0) + ' · ' + (sel.stageTitle || sel.stageId || '-')),
+                kv('现在', nowLineOf(sel), true),
+                kv('门禁', (sel.gates ? sel.gates.done : 0) + '/' + (sel.gates ? sel.gates.total : 0)),
+                kv('回件', pend.count ? '在途 ' + pend.count + (pend.over ? ' · 超阈值' : '') : '无在途审稿'),
+                kv('阻碍', String(sel.blockers || 0)),
+                kv('审核', reviewText(sel)), kv('最近审核结果',results[sel.name]||'…'),
+                kv('成本', '今日 ' + money(tot.todayCny) + ' · 累计 ' + money(tot.cny)),
+                kv('轮次', tot.runs + ' 轮（今日 ' + (tot.todayRuns || 0) + '）'),
+                kv('下轮', sel.nextAt ? ft(sel.nextAt) : '—'),
+                kv('驱动', sel.driver || 'aris'),
+                kv('状态', sel.state || stText(st)),
+              ),
+              sel.topBlocker ? h('div', { className: 'daw-note-i' }, sevIcon(sel.topBlocker.severity) + ' 首要阻碍：' + sel.topBlocker.text) : null,
+              sel.error ? h('div', { className: 'daw-err2' }, '归集错误：' + String(sel.error)) : null,
+            );
+          })()
+        : null;
+
+      return h(
+        'div',
+        { className: 'daw-page' },
+        props.scope?h('div',{className:'daw-note-i'},'全局运行统计'):null,
+        h(
+          'div',
+          { className: 'daw-kpis daw-kpis8' },
+          h(Kpi, { k: '在跑', v: (sum.running || 0) + ' / ' + (sum.total || 0), note: '流水线 ' + (sum.total || 0) + ' 条', cls: 'run' }),
+          h(Kpi, { k: '需人工', v: String(sum.human || 0), note: '阻碍 ' + (sum.blocked || 0) + ' 条', cls: sum.human ? 'err' : '' }),
+          h(Kpi, { k: '等审核', v: String(sum.review || 0), note: '在途审稿', cls: 'warn' }),
+          h(Kpi, { k: '等回件', v: String(sum.waiting || 0), note: '审稿未回', cls: 'warn' }),
+          h(Kpi, { k: '今日轮数', v: String(sum.todayRuns || 0), note: '今日成本 ' + money(sum.todayCny) }),
+          h(Kpi, { k: '今日成本', v: money(sum.todayCny), note: '当日累计', cls: 'ok' }),
+          h(Kpi, { k: '累计', v: (sum.totalRuns || 0) + ' 轮', note: '累计 ' + money(sum.totalCny) }),
+          h(Kpi, { k: '阻碍', v: String(sum.blocked || 0), note: '需人工 ' + (sum.human || 0), cls: sum.blocked ? 'err' : '' }),
+        ),
+        h(
+          'div',
+          { className: 'daw-toolbar' },
+          h(
+            'div',
+            { className: 'daw-chips' },
+            OV_FILTERS.map((f) =>
+              h(
+                'button',
+                { key: f.key, type: 'button', className: 'daw-chip' + (filter === f.key ? ' on' : ''), onClick: () => setFilter(f.key) },
+                f.label,
+                h('span', { className: 'daw-cn' }, String(counts[f.key])),
+              ),
+            ),
+          ),
+          h('input', { className: 'daw-search', placeholder: '搜流水线 / 驱动 / 阶段 / 阻碍…', value: q, onChange: (e) => setQ(e.target.value) }),
+          h(
+            'div',
+            { className: 'daw-tgl' },
+            [
+              ['table', '表格'],
+              ['cards', '卡片'],
+            ].map((pair) => h('button', { key: pair[0], type: 'button', className: view === pair[0] ? 'on' : '', onClick: () => setView(pair[0]) }, pair[1])),
+          ),
+        ),
+        view === 'cards'
+          ? rows.length
+            ? h('div', { className: 'daw-cards' }, rows.map((c) => h(PipeCard, { key: c.id || c.name, card: c, onPick: (n) => props.onOpen(n, 'plan') })))
+            : h('div', { className: 'daw-empty' }, '没有匹配的流水线。')
+          : h(
+              'div',
+              { className: 'daw-tblwrap' },
+              h(
+                'table',
+                { className: 'daw-tbl2', style: { minWidth: '1180px' } },
+                h(
+                  'thead',
+                  null,
+                  h('tr', null, ['状态', '流水线', '阶段', '现在', '门禁', '阻碍', '审核', '成本（今日 / 累计）', '下轮'].map((t) => h('th', { key: t }, t))),
+                ),
+                h(
+                  'tbody',
+                  null,
+                  rowsJsx.length ? rowsJsx : h('tr', null, h('td', { colSpan: 9 }, h('div', { className: 'daw-empty' }, '没有匹配的流水线。'))),
+                ),
+              ),
+            ),
+        detail,
+        (all.errors || []).length ? h('div', { className: 'daw-note' }, all.errors.map((e) => e.name + '：' + e.error).join('；')) : null,
+        h(
+          'div',
+          { className: 'daw-note' },
+          '只读：数据来自各流水线的 state.json / runtime.json / costs.jsonl / meta.json。点行看详情，点「打开完整计划」进那一条；启停与门禁在 Aris_Dsh 面板。',
+        ),
+      );
+    }
+
+    // 计划详情：状态卡 → 阻碍（通栏表）→ 门禁（通栏表）→ 总计划（阶段树 + 11 阶段表）
+    // → 当前阶段三栏步骤 → 最近轮次（成本柱状图 + 表）→ 时间线。各分节默认折叠。
     function PlanDetail(props) {
       const d = props.detail;
-      const [openSec, setOpenSec] = React.useState({ cur: true, stages: true, blocks: true, gates: true });
+      const [openSec, setOpenSec] = React.useState({});
       const [openStage, setOpenStage] = React.useState({});
-      const [openGrp, setOpenGrp] = React.useState({});
       const [sel, setSel] = React.useState('');
       const [log, setLog] = React.useState(null);
       const [toast, setToast] = React.useState('');
@@ -863,7 +1372,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       const gates = (d && d.plan && d.plan.gates) || [];
       const blockers = (d && d.blockers) || [];
       const curStage =
-        stages.find((s) => s.status === 'in_progress') ||
+        stages.filter((s) => s.status === 'in_progress')[0] ||
         stages.filter((s) => s.status === 'done').slice(-1)[0] ||
         stages[0] ||
         null;
@@ -873,26 +1382,24 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         try {
           clearTimeout(timer.current);
         } catch (e) {
-          // 忽略
+          /* 忽略 */
         }
         timer.current = setTimeout(() => setToast(''), 2600);
       };
 
-      // 进详情时：默认只展开「当前阶段 / 阻碍 / 门禁」，其余收起；
-      // 从概览点阶段条进来时直接定位到那一段（这曾是手册里承诺、代码里没做到的行为）。
+      // 换流水线 / 重新扫描后回到「全部收起」；从总览点某行进来时直接展开那一段。
       React.useEffect(() => {
         if (!d) return;
-        setOpenSec({ cur: true, stages: true, blocks: blockers.length > 0, gates: gates.length > 0 });
-        const focusId = props.focusStage;
-        const target = (focusId && stages.find((s) => s.id === focusId)) || curStage;
-        if (!target) return;
-        setSel(target.id);
-        setOpenStage({ [target.id]: true });
-        setOpenGrp({
-          [target.id + ':plan']: true,
-          [target.id + ':todo']: true,
-          [target.id + ':external']: true,
-        });
+        const target = (props.focusStage && stages.filter((s) => s.id === props.focusStage)[0]) || null;
+        if (target) {
+          setOpenSec({ stages: true, cur: true });
+          setOpenStage({ [target.id]: true });
+          setSel(target.id);
+        } else {
+          setOpenSec({});
+          setOpenStage({});
+          setSel(curStage ? curStage.id : '');
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [d && d.scannedAt, props.focusStage]);
 
@@ -922,10 +1429,13 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         if (!value) return Promise.resolve(false);
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            return navigator.clipboard.writeText(value).then(() => true).catch(() => false);
+            return navigator.clipboard
+              .writeText(value)
+              .then(() => true)
+              .catch(() => false);
           }
         } catch (e) {
-          // 落到下面的兜底
+          /* 落到下面的兜底 */
         }
         try {
           const ta = document.createElement('textarea');
@@ -948,7 +1458,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           const el = document.getElementById(id);
           if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
         } catch (e) {
-          // 忽略
+          /* 忽略 */
         }
       };
 
@@ -975,7 +1485,8 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           scrollTo('daw-top');
           if (curStage) {
             setSel(curStage.id);
-            setOpenStage({ [curStage.id]: true });
+            setOpenSec((prev) => ({ ...prev, stages: true }));
+            setOpenStage((prev) => ({ ...prev, [curStage.id]: true }));
           }
           say('已定位到当前阶段');
           return;
@@ -992,13 +1503,36 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       const now = d.now || {};
       const nd = now.nowDoing || {};
       const pend = now.pending || { count: 0 };
+      const budget = d.budget || {};
+      const totals = d.totals || { runs: 0, cny: 0, todayRuns: 0, todayCny: 0, wakes: 0 };
       const doneN = stages.filter((s) => s.status === 'done').length;
       const curN = stages.filter((s) => s.status === 'in_progress').length;
+      const gDone = gates.filter((g) => g.status === 'done').length;
+      const gPend = gates.filter((g) => g.status === 'pending').length;
+      const hb = blockers.filter((b) => b.human).length;
+      const hist = d.history || [];
+      const tline = d.timeline || [];
+      const scanAt = d.scannedAt || '';
+      const paths = d.paths || {};
 
       const toggleSec = (key) => setOpenSec((prev) => ({ ...prev, [key]: !prev[key] }));
       const toggleStage = (id) => setOpenStage((prev) => ({ ...prev, [id]: !prev[id] }));
-      const isGrpOpen = (key, fallback) => (openGrp[key] === undefined ? !!fallback : !!openGrp[key]);
-      const toggleGrp = (key, fallback) => setOpenGrp((prev) => ({ ...prev, [key]: !isGrpOpen(key, fallback) }));
+      const openAll = (on) => {
+        const next = {};
+        ['blocks', 'gates', 'stages', 'cur', 'hist', 'timeline'].forEach((k) => {
+          next[k] = on;
+        });
+        setOpenSec(next);
+        if (on) {
+          const o = {};
+          stages.forEach((s) => {
+            o[s.id] = true;
+          });
+          setOpenStage(o);
+        } else {
+          setOpenStage({});
+        }
+      };
 
       const planRow = (it) =>
         h(
@@ -1022,193 +1556,153 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           it.outputs && it.outputs.length ? h('span', { className: 'daw-step-o' }, it.outputs.join(' · ')) : null,
         );
 
-      // 阶段体内按「条件 / 计划项 / 待做 / 等回件 / 已完成」分组，每组都能单独折叠。
+      // 阶段体内的全部内容都直接展开（折叠交给上层的阶段行），不去掉任何一组。
       const stageBody = (s) => {
         const steps = s.steps || {};
         const done = steps.done || [];
         const todo = steps.todo || [];
         const external = steps.external || [];
         const planItems = s.planItems || [];
-        const pick = (k) => s.id + ':' + k;
-        const grp = (k, label, list, fallback, render) => {
-          if (!list || !list.length) return null;
-          const openGrpNow = isGrpOpen(pick(k), fallback);
-          return h(
-            'div',
-            { className: 'daw-grp' + (openGrpNow ? ' open' : '') },
-            h(
-              'button',
-              { type: 'button', className: 'daw-grp-h', onClick: () => toggleGrp(pick(k), fallback) },
-              h('span', { className: 'daw-sec-x' }, openGrpNow ? '▾' : '▸'),
-              h('b', null, label),
-              h('span', { className: 'daw-sec-n' }, String(list.length)),
-            ),
-            openGrpNow ? render() : null,
-          );
-        };
         return h(
           'div',
           { className: 'daw-stage-b' },
           s.enter || s.exit || s.exitNote
-            ? grp(
-                'crit',
-                '进入 / 退出条件',
-                [1],
-                false,
-                () =>
-                  h(
-                    'div',
-                    { className: 'daw-crit' },
-                    s.enter ? h('div', null, h('i', null, '进入 '), s.enter) : null,
-                    s.exit ? h('div', null, h('i', null, '退出 '), s.exit) : null,
-                    s.exitNote ? h('div', null, h('i', null, '备注 '), s.exitNote) : null,
-                  ),
+            ? h(
+                'div',
+                { className: 'daw-crit' },
+                s.enter ? h('div', null, h('i', null, '进入 '), s.enter) : null,
+                s.exit ? h('div', null, h('i', null, '退出 '), s.exit) : null,
+                s.exitNote ? h('div', null, h('i', null, '备注 '), s.exitNote) : null,
               )
             : null,
-          grp('plan', '计划项（PIPELINE.md）', planItems, true, () =>
-            h('div', { className: 'daw-steps' }, planItems.map(planRow)),
-          ),
-          grp('todo', '待做（自己能干）', todo, true, () =>
-            h('div', { className: 'daw-steps' }, todo.map((it, k) => stepRow(it, 'todo', String(k + 1)))),
-          ),
-          grp('external', '等外部回件', external, true, () =>
-            h('div', { className: 'daw-steps' }, external.map((it, k) => stepRow(it, 'ext', String(k + 1)))),
-          ),
-          grp('done', '已完成步骤', done, false, () =>
-            h('div', { className: 'daw-steps' }, done.map((it, k) => stepRow(it, 'ok', String(k + 1)))),
-          ),
-          !planItems.length && !done.length && !todo.length && !external.length
-            ? h('div', { className: 'daw-empty' }, '这个阶段还没有记录。')
+          planItems.length
+            ? h(
+                'div',
+                null,
+                h('div', { className: 'daw-sub-h' }, '计划项（PIPELINE.md）· ' + planItems.length),
+                h('div', { className: 'daw-steps' }, planItems.map(planRow)),
+              )
             : null,
+          todo.length
+            ? h(
+                'div',
+                null,
+                h('div', { className: 'daw-sub-h' }, '待做（自己能干）· ' + todo.length),
+                h('div', { className: 'daw-steps' }, todo.map((it, k) => stepRow(it, 'todo', String(k + 1)))),
+              )
+            : null,
+          external.length
+            ? h(
+                'div',
+                null,
+                h('div', { className: 'daw-sub-h' }, '等外部回件 · ' + external.length),
+                h('div', { className: 'daw-steps' }, external.map((it, k) => stepRow(it, 'ext', String(k + 1)))),
+              )
+            : null,
+          done.length
+            ? h(
+                'div',
+                null,
+                h('div', { className: 'daw-sub-h' }, '已完成步骤 · ' + done.length),
+                h('div', { className: 'daw-steps' }, done.map((it, k) => stepRow(it, 'ok', String(k + 1)))),
+              )
+            : null,
+          !planItems.length && !done.length && !todo.length && !external.length ? h('div', { className: 'daw-empty' }, '这个阶段还没有记录。') : null,
         );
       };
 
-      const stageHead = (s, always) => {
-        const idx = stages.indexOf(s) + 1;
-        const isOpen = always ? openStage[s.id] !== false : !!openStage[s.id];
-        const steps = s.steps || {};
+      // 11 阶段表：一行一阶段，点行展开同一阶段的明细（表格下方追加一行，不破坏列宽）。
+      const stageRows = stages.map((s, i) => {
+        const isOpen = !!openStage[s.id];
         const planItems = s.planItems || [];
+        const clip = (t, n) => { const x = String(t || '').replace(/\s+/g, ' '); return x.length > (n || 46) ? x.slice(0, n || 46) + '…' : x; };
         const donePlans = planItems.filter((it) => it.state === 'done').length;
+        const steps = s.steps || {};
         return h(
-          'button',
-          {
-            type: 'button',
-            className: 'daw-stage-h' + (s.status === 'in_progress' ? ' cur' : ''),
-            onClick: () => (always ? toggleStage(s.id) : toggleStage(s.id)),
-            'aria-expanded': isOpen,
-          },
-          h('span', { className: 'daw-stage-i' }, String(idx).padStart(2, '0')),
-          h('span', { className: 'daw-dot ' + (s.status || 'pending') }),
-          h('b', { className: 'daw-stage-id' }, s.id),
-          h('span', { className: 'daw-stage-t' }, s.title || ''),
-          h('span', { className: 'daw-badge' }, stText(s.status)),
-          h('span', { className: 'daw-stage-n' }, '计划 ' + donePlans + '/' + planItems.length + ' · 待做 ' + (steps.todo || []).length),
-          h('span', { className: 'daw-stage-x' }, isOpen ? '收起' : '展开'),
-        );
-      };
-
-      const stageBlock = (s, always) => {
-        const isOpen = always ? openStage[s.id] !== false : !!openStage[s.id];
-        return h(
-          'div',
-          { key: s.id, className: 'daw-stage' + (s.status === 'in_progress' ? ' cur' : '') + (sel === s.id ? ' sel' : '') },
-          stageHead(s, always),
-          isOpen ? stageBody(s) : null,
-        );
-      };
-
-      const statusLine = h(
-        'div',
-        { className: 'daw-now' },
-        h(
-          'div',
-          { className: 'daw-now-i' },
-          h('span', { className: 'daw-now-k' }, '状态'),
-          h('span', { className: 'daw-badge ' + stOf(now) }, now.statusLabel || stText(stOf(now))),
-        ),
-        h(
-          'div',
-          { className: 'daw-now-i' },
-          h('span', { className: 'daw-now-k' }, '阶段'),
-          h('span', null, (now.stageIndex || 0) + '/' + (now.stageTotal || 0) + ' · ' + (now.stageTitle || now.stageId || '-') + (now.state ? ' · ' + now.state : '')),
-        ),
-        h(
-          'div',
-          { className: 'daw-now-i wide' },
-          h('span', { className: 'daw-now-k' }, '现在'),
+          React.Fragment,
+          { key: s.id },
           h(
-            'span',
-            null,
+            'tr',
+            { id: 'daw-stage-' + s.id, className: 'clk' + (sel === s.id ? ' on' : '') + (s.status === 'in_progress' ? ' cur' : ''), onClick: () => { setSel(s.id); toggleStage(s.id); } },
+            h('td', null, h('span', { className: 'daw-stage-i' }, String(i + 1).padStart(2, '0') + ' '), h('code', { className: 'daw-tid' }, s.id)),
+            h('td', { className: 'wrap' }, h('div', { className: 'daw-st' }, h('span', { className: 'daw-dot ' + dotCls(s.status) }), h('b', null, s.title || ''))),
+            h('td', null, h('span', { className: 'daw-badge' }, stText(s.status))),
+            h('td', null, '计划 ' + donePlans + '/' + planItems.length + ' · 已执行 ' + (steps.done || []).length + ' · 待做 ' + (steps.todo || []).length),
+            h('td', { className: 'wrap', title: s.enter || '' }, clip(s.enter) || '—'),
+            h('td', { className: 'wrap', title: [s.exit, s.exitNote].filter(Boolean).join(' · ') }, clip([s.exit, s.exitNote].filter(Boolean).join(' · ')) || '—'),
+          ),
+          isOpen ? h('tr', { key: s.id + '-b' }, h('td', { colSpan: 6, style: { padding: 0 } }, stageBody(s))) : null,
+        );
+      });
+
+      const col = (label, list, kind) =>
+        h(
+          'div',
+          { className: 'daw-col b' },
+          h('div', { className: 'daw-col-h' }, label + ' · ' + list.length),
+          list.length
+            ? h('div', { className: 'daw-steps' }, list.map((it, k) => stepRow(it, kind, String(k + 1))))
+            : h('div', { className: 'daw-note-i' }, '没有。'),
+        );
+
+      const statusCard = h(
+        'div',
+        { className: 'daw-sc', id: 'daw-top' },
+        h(
+          'div',
+          { className: 'daw-sc-h' },
+          h('b', { className: 'daw-sc-n' }, (d.pipeline && d.pipeline.name) || props.name || ''),
+          h('span', { className: 'daw-badge' }, (d.pipeline && d.pipeline.driver) || 'aris'),
+          h('span', { className: 'daw-badge ' + stOf(now) }, now.statusLabel || stText(stOf(now))),
+          d.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
+          pend.count ? h('span', { className: 'daw-badge review' }, '等回件 ' + pend.count) : null,
+          h('span', { className: 'daw-note-i' }, '只读'),
+          h('span', { className: 'daw-note-i' }, 'runId ' + (now.runId || '未运行') + (now.pid ? ' · pid ' + now.pid : '')),
+        ),
+        h(Rail, { stages: stages, activeId: sel || (curStage && curStage.id) }),
+        h(
+          'div',
+          { className: 'daw-sc-kv' },
+          kv('阶段', (now.stageIndex || 0) + '/' + (now.stageTotal || 0) + ' · ' + (now.stageTitle || now.stageId || '-') + (now.state ? ' · ' + now.state : '')),
+          kv(
+            '现在',
             nd.running
               ? '本轮 ' + ft(nd.startedAt) + ' 起 · 已跑 ' + fmtDur(nd.elapsedMin) + ' · 步数 ' + nd.steps + '/' + (nd.callsMax || '-') + ' · 上下文 ' + pct(nd.ctxPct)
               : nd.startedAt
                 ? '上一轮 ' + ft(nd.startedAt) + ' 开始，历时 ' + fmtDur(nd.elapsedMin) + ' · 步数 ' + nd.steps + ' · 上下文 ' + pct(nd.ctxPct)
                 : '还没有执行记录',
+            true,
           ),
-        ),
-        h(
-          'div',
-          { className: 'daw-now-i' },
-          h('span', { className: 'daw-now-k' }, '回件'),
-          h('span', { className: pend.over ? 'daw-warn-t' : null }, pend.count ? '在途 ' + pend.count + ' 条 · 最久 ' + fmtDur(pend.ageMin) + (pend.over ? ' · 超阈值' : '') : '无在途审稿'),
-        ),
-        h(
-          'div',
-          { className: 'daw-now-i' },
-          h('span', { className: 'daw-now-k' }, '成本'),
-          h(
-            'span',
-            null,
-            '轮 ' + d.totals.runs + ' · ' + money(d.totals.cny) + ' · 今日 ' + d.totals.todayRuns + ' 轮 ' + money(d.totals.todayCny) +
-              (now.nextAt && stOf(now) !== 'running' ? ' · 下轮 ' + ft(now.nextAt) : ''),
-          ),
+          kv('上下文', pct(budget.ctxPct != null ? budget.ctxPct : nd.ctxPct) + ' · 步数 ' + (budget.steps != null ? budget.steps : nd.steps || 0)),
+          kv('回件', pend.count ? '在途 ' + pend.count + ' 条 · 最久 ' + fmtDur(pend.ageMin) + (pend.over ? ' · 超阈值' : '') : '无在途审稿'),
+          kv('门禁', gDone + '/' + gates.length + (gPend ? '（待做 ' + gPend + '）' : '')),
+          kv('累计', '轮 ' + totals.runs + ' · ' + money(totals.cny)),
+          kv('今日', totals.todayRuns + ' 轮 · ' + money(totals.todayCny)),
+          kv('唤醒', String(totals.wakes || 0) + ' 次'),
+          kv('下轮', now.nextAt ? ft(now.nextAt) : '—'),
+          kv('扫描', scanAt ? ftFull(scanAt) : '—'),
+          kv('根目录', paths.root || '—', true),
+          d.narrative ? kv('叙述', String(d.narrative), true) : null,
         ),
       );
 
       return h(
         'div',
-        { className: 'daw-plan' },
-        h(
-          'div',
-          { className: 'daw-planhead', id: 'daw-top' },
-          h(
-            'div',
-            { className: 'daw-planhead-l' },
-            h('b', null, d.pipeline.name),
-            h('button', { type: 'button', className: 'daw-mini back', onClick: props.onBack }, '← 返回计划列表'),
-            d.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
-          ),
-          h(
-            'div',
-            { className: 'daw-planhead-r' },
-            h('span', { className: 'daw-note-i' }, 'runId ' + (now.runId || '未运行') + (now.pid ? ' · pid ' + now.pid : '')),
-          ),
-        ),
-        statusLine,
+        { className: 'daw-stack' },
+        statusCard,
         h(
           'div',
           { className: 'daw-secbar' },
-          h('button', { type: 'button', className: 'daw-mini', onClick: () => setOpenSec({ cur: true, stages: true, blocks: true, gates: true, timeline: true, hist: true }) }, '展开全部'),
-          h('button', { type: 'button', className: 'daw-mini', onClick: () => setOpenSec({}) }, '全部收起'),
+          h('button', { type: 'button', className: 'daw-mini', onClick: () => openAll(true) }, '展开全部'),
+          h('button', { type: 'button', className: 'daw-mini', onClick: () => openAll(false) }, '收起全部'),
           h('span', { className: 'daw-note-i' }, '共 ' + stages.length + ' 阶段（完成 ' + doneN + ' · 进行 ' + curN + ' · 未开始 ' + (stages.length - doneN - curN) + '）'),
-        ),
-        h(
-          Section,
-          {
-            title: '当前阶段',
-            brief: curStage ? curStage.id + ' · ' + (curStage.title || '') : '没有阶段数据',
-            open: !!openSec.cur,
-            onToggle: () => toggleSec('cur'),
-            id: 'daw-sec-cur',
-          },
-          curStage ? h('div', { className: 'daw-stages' }, stageBlock(curStage, true)) : h('div', { className: 'daw-empty' }, '没有阶段数据'),
         ),
         h(
           Section,
           {
             title: '阻碍',
             count: blockers.length,
-            brief: blockers.length ? (blockers.filter((b) => b.human).length ? '其中 ' + blockers.filter((b) => b.human).length + ' 条需人工' : '都不需要人') : '没有阻碍',
+            brief: blockers.length ? (hb ? '其中 ' + hb + ' 条需人工' : '都不需要人') : '没有阻碍',
             open: !!openSec.blocks,
             onToggle: () => toggleSec('blocks'),
             id: 'daw-sec-blocks',
@@ -1216,18 +1710,30 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           blockers.length
             ? h(
                 'div',
-                { className: 'daw-blocks' },
-                blockers.map((b, i) =>
+                { className: 'daw-tblwrap' },
+                h(
+                  'table',
+                  { className: 'daw-tbl2', style: { minWidth: '920px' } },
+                  h('thead', null, h('tr', null, ['严重度', '类型', '需人工', '说明', '证据', '动作'].map((t) => h('th', { key: t }, t)))),
                   h(
-                    'div',
-                    { key: 'b' + i, className: 'daw-block ' + b.severity },
-                    h(
-                      'div',
-                      { className: 'daw-block-t' },
-                      h('div', null, h('span', { className: 'daw-block-k' }, sevIcon(b.severity) + ' ' + b.kind + (b.human ? ' · 需人工' : '')), '：' + b.text),
-                      b.evidence ? h('div', { className: 'daw-block-e' }, b.evidence) : null,
+                    'tbody',
+                    null,
+                    blockers.map((b, i) =>
+                      h(
+                        'tr',
+                        { key: 'b' + i },
+                        h(
+                          'td',
+                          null,
+                          h('span', { className: 'daw-badge ' + (b.severity === 'error' ? 'human' : b.severity === 'warn' ? 'review' : '') }, sevIcon(b.severity) + ' ' + String(b.severity || 'info')),
+                        ),
+                        h('td', null, String(b.kind || '—')),
+                        h('td', null, b.human ? '是' : '否'),
+                        h('td', { className: 'wrap' }, String(b.text || '')),
+                        h('td', { className: 'wrap' }, b.evidence ? String(b.evidence) : '—'),
+                        h('td', null, b.action ? h(ActionBtn, { action: b.action, onRun: runAction }) : '—'),
+                      ),
                     ),
-                    b.action ? h(ActionBtn, { action: b.action, onRun: runAction }) : null,
                   ),
                 ),
               )
@@ -1238,7 +1744,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           {
             title: '门禁',
             count: gates.length,
-            brief: gates.filter((g) => g.status === 'done').length + ' 已裁 · ' + gates.filter((g) => g.status === 'pending').length + ' 待做',
+            brief: gDone + ' 已裁 · ' + gPend + ' 待做',
             open: !!openSec.gates,
             onToggle: () => toggleSec('gates'),
             id: 'daw-sec-gates',
@@ -1246,24 +1752,26 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           gates.length
             ? h(
                 'div',
-                { className: 'daw-gates' },
-                gates.map((g) =>
+                { className: 'daw-tblwrap' },
+                h(
+                  'table',
+                  { className: 'daw-tbl2', style: { minWidth: '860px' } },
+                  h('thead', null, h('tr', null, ['门禁', '状态', '裁决', '判据', '实测', '完成于'].map((t) => h('th', { key: t }, t)))),
                   h(
-                    'div',
-                    {
-                      key: g.id,
-                      id: 'daw-gate-' + g.id,
-                      className: 'daw-gate ' + (g.status === 'fail' ? 'fail' : g.status === 'pending' ? 'pending' : ''),
-                    },
-                    h(
-                      'div',
-                      { className: 'daw-gate-h' },
-                      h('b', null, g.id),
-                      h('span', { className: 'daw-badge' }, g.status === 'done' ? '已裁' : g.status === 'pending' ? '待做' : g.status),
-                      g.decision ? h('span', { className: 'daw-badge' }, String(g.decision)) : null,
+                    'tbody',
+                    null,
+                    gates.map((g) =>
+                      h(
+                        'tr',
+                        { key: g.id, id: 'daw-gate-' + g.id },
+                        h('td', null, h('code', { className: 'daw-tid' }, g.id)),
+                        h('td', null, h('span', { className: 'daw-badge' }, g.status === 'done' ? '已裁' : g.status === 'pending' ? '待做' : String(g.status))),
+                        h('td', null, g.decision ? String(g.decision) : '—'),
+                        h('td', { className: 'wrap' }, g.criteria || '—'),
+                        h('td', { className: 'wrap' }, g.observed ? (typeof g.observed === 'string' ? g.observed : JSON.stringify(g.observed)) : '—'),
+                        h('td', null, g.completed ? ft(g.completed) : '—'),
+                      ),
                     ),
-                    h('div', { className: 'daw-gate-c' }, g.criteria || ''),
-                    g.observed ? h('div', { className: 'daw-gate-o' }, typeof g.observed === 'string' ? g.observed : JSON.stringify(g.observed)) : null,
                   ),
                 ),
               )
@@ -1274,76 +1782,154 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
           {
             title: '总计划',
             count: stages.length,
-            brief: '点阶段标题展开它的条件 / 计划项 / 待做 / 已完成',
+            brief: '11 阶段表；点行展开条件 / 计划项 / 待做 / 已完成',
             open: !!openSec.stages,
             onToggle: () => toggleSec('stages'),
             id: 'daw-sec-stages',
           },
-          h('div', { className: 'daw-stages' }, stages.map((s) => stageBlock(s, false))),
+          h(
+            'div',
+            { className: 'daw-stack' },
+            h(
+              'div',
+              { className: 'daw-tblwrap' },
+              h(
+                'table',
+                { className: 'daw-tbl2', style: { minWidth: '900px' } },
+                h('thead', null, h('tr', null, ['阶段', '标题', '状态', '完成', '进入条件', '退出'].map((t) => h('th', { key: t }, t)))),
+                h('tbody', null, stages.length ? stageRows : h('tr', null, h('td', { colSpan: 6 }, h('div', { className: 'daw-empty' }, '没有阶段数据。')))),
+              ),
+            ),
+          ),
         ),
         h(
           Section,
           {
-            title: '进展时间线',
-            count: (d.timeline || []).length,
-            brief: '轮次 / 审查回件 / 门禁裁决，按时间倒序',
-            open: !!openSec.timeline,
-            onToggle: () => toggleSec('timeline'),
-            id: 'daw-sec-timeline',
+            title: '当前阶段',
+            brief: curStage ? curStage.id + ' · ' + (curStage.title || '') : '没有阶段数据',
+            open: !!openSec.cur,
+            onToggle: () => toggleSec('cur'),
+            id: 'daw-sec-cur',
           },
-          (d.timeline || []).length
+          curStage
             ? h(
                 'div',
-                { className: 'daw-tl' },
-                d.timeline.map((it, i) =>
-                  h(
-                    'div',
-                    { key: 'tl' + i, className: 'daw-tl-row ' + (it.severity || '') },
-                    h(
-                      'div',
-                      { className: 'daw-tl-h' },
-                      h('span', { className: 'daw-tl-t' }, ft(it.at)),
-                      h('span', { className: 'daw-tl-k ' + (it.kind || '') }, it.kind === 'run' ? '轮次' : it.kind === 'review' ? '审查' : it.kind === 'gate' ? '门禁' : it.kind || '-'),
-                      h('span', { className: 'daw-tl-x' }, it.text),
-                    ),
-                    it.detail ? h('div', { className: 'daw-tl-d', title: it.detail }, it.detail) : null,
-                  ),
+                { className: 'daw-stack' },
+                h(
+                  'div',
+                  { className: 'daw-cols3' },
+                  col('已完成步骤', (curStage.steps && curStage.steps.done) || [], 'ok'),
+                  col('待办步骤', (curStage.steps && curStage.steps.todo) || [], 'todo'),
+                  col('外部等待', (curStage.steps && curStage.steps.external) || [], 'ext'),
                 ),
+                curStage.enter || curStage.exit || curStage.exitNote
+                  ? h(
+                      'div',
+                      { className: 'daw-crit' },
+                      curStage.enter ? h('div', null, h('i', null, '进入 '), curStage.enter) : null,
+                      curStage.exit ? h('div', null, h('i', null, '退出 '), curStage.exit) : null,
+                      curStage.exitNote ? h('div', null, h('i', null, '备注 '), curStage.exitNote) : null,
+                    )
+                  : null,
+                (curStage.planItems || []).length
+                  ? h(
+                      'div',
+                      null,
+                      h('div', { className: 'daw-sub-h' }, '计划项（PIPELINE.md）· ' + curStage.planItems.length),
+                      h('div', { className: 'daw-steps' }, curStage.planItems.map(planRow)),
+                    )
+                  : null,
+                h('div', { className: 'daw-note-i' }, '点「总计划」里的同一行可展开这一阶段的完整明细（条件 / 计划项 / 已完成步骤都在里面）。'),
               )
-            : h('div', { className: 'daw-empty' }, '没有时间线记录。'),
+            : h('div', { className: 'daw-empty' }, '没有阶段数据'),
         ),
         h(
           Section,
           {
             title: '最近轮次',
-            count: Math.min(8, (d.history || []).length),
-            brief: '每轮步数 / 成本 / 结果',
+            count: Math.min(8, hist.length),
+            brief: '每轮成本柱状图 + 步数 / 成本 / 结论',
             open: !!openSec.hist,
             onToggle: () => toggleSec('hist'),
             id: 'daw-sec-hist',
           },
-          (d.history || []).length
+          hist.length
             ? h(
-                'table',
-                { className: 'daw-tbl' },
-                h('thead', null, h('tr', null, ['轮次', '开始', '步数', '成本', '结果'].map((t) => h('th', { key: t }, t)))),
+                'div',
+                { className: 'daw-stack' },
+                h(BarChart, {
+                  title: '每轮成本',
+                  note: '细柱 ≤16px · 虚线=均值 · 轮次多时横向滚动',
+                  items: hist.map((it) => ({
+                    label: String(it.runId).slice(-5),
+                    value: Number(it.cny) || 0,
+                    title: '#' + String(it.runId).slice(-13) + ' · ' + ft(it.start),
+                  })),
+                  fmt: moneyShort,
+                }),
                 h(
-                  'tbody',
-                  null,
-                  d.history.slice(0, 8).map((it) =>
+                  'div',
+                  { className: 'daw-tblwrap' },
+                  h(
+                    'table',
+                    { className: 'daw-tbl2', style: { minWidth: '760px' } },
+                    h('thead', null, h('tr', null, ['轮次', '开始', '步数', '成本', '结论', '退出码'].map((t) => h('th', { key: t }, t)))),
                     h(
-                      'tr',
-                      { key: it.runId },
-                      h('td', { title: it.runId }, String(it.runId).slice(-13)),
-                      h('td', null, ft(it.start)),
-                      h('td', null, String(it.steps)),
-                      h('td', null, money(it.cny)),
-                      h('td', null, (it.verdict || '-') + (it.exit ? ' (exit ' + it.exit + ')' : '')),
+                      'tbody',
+                      null,
+                      hist.slice(0, 8).map((it) =>
+                        h(
+                          'tr',
+                          { key: it.runId },
+                          h('td', { title: it.runId }, String(it.runId).slice(-13)),
+                          h('td', null, ft(it.start)),
+                          h('td', null, String(it.steps)),
+                          h('td', null, money(it.cny)),
+                          h('td', null, it.verdict || '—'),
+                          h('td', null, it.exit != null && it.exit !== '' ? String(it.exit) : '—'),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               )
             : h('div', { className: 'daw-empty' }, '还没有执行记录。'),
+        ),
+        h(
+          Section,
+          {
+            title: '进展时间线',
+            count: tline.length,
+            brief: '轮次 / 审查回件 / 门禁裁决，按时间倒序',
+            open: !!openSec.timeline,
+            onToggle: () => toggleSec('timeline'),
+            id: 'daw-sec-timeline',
+          },
+          tline.length
+            ? h(
+                'div',
+                { className: 'daw-tblwrap' },
+                h(
+                  'table',
+                  { className: 'daw-tbl2', style: { minWidth: '720px' } },
+                  h('thead', null, h('tr', null, ['时间', '类型', '严重度', '内容'].map((t) => h('th', { key: t }, t)))),
+                  h(
+                    'tbody',
+                    null,
+                    tline.map((it, i) =>
+                      h(
+                        'tr',
+                        { key: 'tl' + i },
+                        h('td', null, ft(it.at)),
+                        h('td', null, it.kind === 'run' ? '轮次' : it.kind === 'review' ? '审查' : it.kind === 'gate' ? '门禁' : String(it.kind || '—')),
+                        h('td', null, h('span', { className: 'daw-tl-k ' + (it.severity || '') }, it.severity || '—')),
+                        h('td', { className: 'wrap' }, String(it.text || '') + (it.detail ? ' · ' + it.detail : '')),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : h('div', { className: 'daw-empty' }, '没有时间线记录。'),
         ),
         log
           ? h(
@@ -1356,8 +1942,8 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
                 h('code', { className: 'daw-drawer-r' }, log.rel || ''),
                 h('button', { type: 'button', className: 'daw-mini', onClick: () => setLog(null) }, '关闭'),
               ),
-              log.busy ? h('div', { className: 'daw-empty' }, '正在读取…') : null,
-              log.err ? h('div', { className: 'daw-empty' }, '读取失败：' + log.err) : null,
+              log.busy ? h('div', { className: 'daw-note-i' }, '正在读取…') : null,
+              log.err ? h('div', { className: 'daw-err2' }, '读取失败：' + log.err) : null,
               !log.busy && !log.err ? h('pre', { className: 'daw-pre' }, log.text || '（空文件）') : null,
             )
           : null,
@@ -1366,13 +1952,22 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
     }
 
     function PlanTab(props) {
-      const [sel, setSel] = React.useState('');
+      const pipes = props.pipes || [];
+      const [sel, setSel] = React.useState(props.initial || '');
       const [focus, setFocus] = React.useState('');
       const [detail, setDetail] = React.useState(null);
       const [err, setErr] = React.useState('');
+      const name = sel || (pipes[0] && pipes[0].name) || '';
+
+      // 总览里「打开完整计划 →」带过来的名字。
+      React.useEffect(() => {
+        if (!props.initial || props.initial === sel) return;
+        setSel(props.initial);
+        setFocus('');
+      }, [props.initial]);
 
       React.useEffect(() => {
-        if (!sel) {
+        if (!name) {
           setDetail(null);
           setErr('');
           return undefined;
@@ -1380,7 +1975,7 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         let alive = true;
         setDetail(null);
         setErr('');
-        getJson('/api/aris-wiki/plan?name=' + encodeURIComponent(sel) + '&t=' + Date.now())
+        getJson('/api/aris-wiki/plan?name=' + encodeURIComponent(name) + '&t=' + Date.now())
           .then((body) => {
             if (!alive) return;
             if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
@@ -1390,158 +1985,392 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
         return () => {
           alive = false;
         };
-      }, [sel]);
-
-      if (!sel) return h(PlanOverview, { planAll: props.planAll, onPick: (n, stage) => { setSel(n); setFocus(stage || ''); } });
-      return h('div', { className: 'daw-cards', style: { gridTemplateColumns: '1fr' } }, h(PlanDetail, { detail, err, focusStage: focus, onBack: () => { setSel(''); setFocus(''); } }));
-    }
-
-    function ArtsTab(props) {
-      const [data, setData] = React.useState(null);
-      const [err, setErr] = React.useState('');
-      const [rel, setRel] = React.useState('');
-      const [file, setFile] = React.useState(null);
-      const pipes = props.pipes || [];
-      const [pick, setPick] = React.useState('');
-      const name = pick || ((pipes[0] && pipes[0].name) || '');
-      const load = React.useCallback(async () => {
-        setErr('');
-        try {
-          const body = await getJson(`/api/aris-wiki/artifacts?${name ? `name=${encodeURIComponent(name)}&` : ''}t=${Date.now()}`);
-          if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
-          setData(body);
-        } catch (e) {
-          setErr(String((e && e.message) || e));
-        }
       }, [name]);
-      React.useEffect(() => {
-        load();
-        setRel('');
-        setFile(null);
-      }, [load]);
-      const open = React.useCallback(
-        async (target) => {
-          setRel(target);
-          setFile(null);
-          try {
-            const body = await getJson(`/api/aris-wiki/file?name=${encodeURIComponent(name || (data && data.pipeline && data.pipeline.name) || '')}&rel=${encodeURIComponent(target)}&t=${Date.now()}`);
-            if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
-            setFile(body);
-          } catch (e) {
-            setFile({ ok: false, error: String((e && e.message) || e) });
-          }
-        },
-        [data, name],
-      );
 
-      if (err) return h('div', { className: 'daw-empty' }, `读取产物失败：${err}`);
-      if (!data) return h('div', { className: 'daw-empty' }, tr('loading'));
-      const groups = data.groups || [];
-      const main = data.main;
-      const files = groups.filter((g) => !rel || true).flatMap((g) => g.files || []);
-      let view;
-      if (!rel) view = h('div', { className: 'daw-empty' }, '从左侧选一个文件预览。');
-      else if (!file) view = h('div', { className: 'daw-empty' }, '正在读取…');
-      else if (file.ok === false) view = h('div', { className: 'daw-empty' }, String(file.error || '读取失败'));
-      else if (file.dataUrl && /^image\//.test(file.mime || '')) view = h('img', { className: 'daw-art-img', src: file.dataUrl, alt: rel });
-      else if (file.dataUrl && (file.mime || '').includes('pdf')) view = h('iframe', { src: file.dataUrl, style: { width: '100%', height: '100%', minHeight: 420, border: 0 } });
-      else view = h('div', { className: 'daw-md' }, renderMarkdown(file.text || ''));
       return h(
         'div',
-        { className: 'daw-arts-wrap' },
+        { className: 'daw-page' },
+        name
+          ? h(PlanDetail, { detail: detail, err: err, focusStage: focus, name: name })
+          : h('div', { className: 'daw-empty' }, '还没有登记任何 ARIS 流水线。'),
+      );
+    }
+
+    // 产物：左侧文件表（限高内滚 + 表头吸顶 + 点行选中）+ 右侧预览；中间分隔条可拖。
+    const IMG_RE = /\.(png|jpe?g|gif|webp|svg|bmp)$/i;
+    const splitKey = 'daw-arts-split';
+    const readSplit = () => {
+      try {
+        const v = parseInt(localStorage.getItem(splitKey) || '', 10);
+        if (Number.isFinite(v)) return Math.min(760, Math.max(240, v));
+      } catch (e) {
+        /* 忽略 */
+      }
+      return 360;
+    };
+
+    function ArtsTab(props) {
+      const pipes = props.pipes || [];
+      const [name, setName] = React.useState(props.initial || (pipes[0] && pipes[0].name) || '');
+      const [data, setData] = React.useState(null);
+      const [err, setErr] = React.useState('');
+      const [sel, setSel] = React.useState('');
+      const [pv, setPv] = React.useState(null);
+      const [w, setW] = React.useState(readSplit);
+      const [dragging, setDragging] = React.useState(false);
+      const [narrow, setNarrow] = React.useState(false);
+      const [toast, setToast] = React.useState('');
+      const wrapRef = React.useRef(null);
+      const timer = React.useRef(0);
+
+      const say = (msg) => {
+        setToast(String(msg || ''));
+        try {
+          clearTimeout(timer.current);
+        } catch (e) {
+          /* 忽略 */
+        }
+        timer.current = setTimeout(() => setToast(''), 2200);
+      };
+
+      React.useEffect(() => {
+        if (!props.initial || props.initial === name) return;
+        setName(props.initial);
+        setSel('');
+        setPv(null);
+      }, [props.initial]);
+
+      // 窄屏（<900px）退单列；窗口缩放时跟着变。
+      React.useEffect(() => {
+        const onResize = () => setNarrow(window.innerWidth < 900);
+        onResize();
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+      }, []);
+
+      React.useEffect(() => {
+        if (!name) {
+          setData(null);
+          return undefined;
+        }
+        let alive = true;
+        setData(null);
+        setErr('');
+        getJson('/api/aris-wiki/artifacts?name=' + encodeURIComponent(name) + '&t=' + Date.now())
+          .then((body) => {
+            if (!alive) return;
+            if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
+            setData(body);
+            const first = body.main && body.main.rel ? body.main.rel : '';
+            setSel(first);
+          })
+          .catch((e) => alive && setErr(String((e && e.message) || e)));
+        return () => {
+          alive = false;
+        };
+      }, [name]);
+
+      // 预览：只读地拿一份文件内容（文本截断 / 二进制走 dataUrl）。
+      React.useEffect(() => {
+        if (!sel || !name) {
+          setPv(null);
+          return undefined;
+        }
+        let alive = true;
+        setPv({ rel: sel, loading: true });
+        getJson('/api/aris-wiki/file?name=' + encodeURIComponent(name) + '&rel=' + encodeURIComponent(sel) + '&t=' + Date.now())
+          .then((body) => {
+            if (!alive) return;
+            if (!body) throw new Error('空响应');
+            if (body.error) throw new Error(String(body.error));
+            setPv({ rel: sel, ...body, loading: false });
+          })
+          .catch((e) => alive && setPv({ rel: sel, loading: false, error: String((e && e.message) || e) }));
+        return () => {
+          alive = false;
+        };
+      }, [sel, name]);
+
+      // 拖分隔条：宽度写进 localStorage，双击复位。
+      React.useEffect(() => {
+        if (!dragging) return undefined;
+        const move = (e) => {
+          const box = wrapRef.current && wrapRef.current.getBoundingClientRect ? wrapRef.current.getBoundingClientRect() : null;
+          if (!box) return;
+          setW(Math.min(760, Math.max(240, Math.round(e.clientX - box.left))));
+        };
+        const up = () => {
+          setDragging(false);
+          setW((v) => {
+            try {
+              localStorage.setItem(splitKey, String(v));
+            } catch (e) {
+              /* 忽略 */
+            }
+            return v;
+          });
+        };
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+        return () => {
+          window.removeEventListener('mousemove', move);
+          window.removeEventListener('mouseup', up);
+        };
+      }, [dragging]);
+
+      const resetSplit = () => {
+        setW(360);
+        try {
+          localStorage.removeItem(splitKey);
+        } catch (e) {
+          /* 忽略 */
+        }
+        say('已复位分栏宽度');
+      };
+
+      const copyText = (text) => {
+        const value = String(text || '');
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(value).then(
+              () => say('已复制路径'),
+              () => say('复制失败：' + value),
+            );
+            return;
+          }
+        } catch (e) {
+          /* 落到兜底 */
+        }
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = value;
+          ta.setAttribute('readonly', 'readonly');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand && document.execCommand('copy');
+          ta.remove();
+          say('已复制路径');
+        } catch (e) {
+          say('请手动复制：' + value);
+        }
+      };
+
+      const openFile = () => {
+        const cur = pv || {};
+        try {
+          if (cur.dataUrl) {
+            const win = window.open(cur.dataUrl, '_blank');
+            if (!win) say('浏览器拦截了新窗口，请允许弹窗');
+            return;
+          }
+          if (cur.text != null) {
+            const url = URL.createObjectURL(new Blob([String(cur.text)], { type: 'text/plain;charset=utf-8' }));
+            const win = window.open(url, '_blank');
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+            if (!win) say('浏览器拦截了新窗口，请允许弹窗');
+            return;
+          }
+        } catch (e) {
+          say('打开失败：' + String((e && e.message) || e));
+          return;
+        }
+        say('还没有可打开的内容');
+      };
+
+      const files = [];
+      ((data && data.groups) || []).forEach((g) => {
+        (g.files || []).forEach((f) => {
+          files.push({ ...f, gid: g.id, glabel: g.label || g.id });
+        });
+      });
+      const selFile = files.filter((f) => f.rel === sel)[0] || null;
+      const tot = (data && data.totals) || { files: 0, bytes: 0 };
+      const mainPaper = data && data.main;
+
+      const previewBody = () => {
+        if (!pv || pv.loading) {
+          return h('div', { className: 'daw-skel' }, [0, 1, 2, 3, 4, 5, 6, 7].map((i) => h('i', { key: 's' + i })));
+        }
+        if (pv.error) return h('div', { className: 'daw-err2' }, '预览失败：' + pv.error);
+        if (pv.dataUrl) {
+          if (/^application\/pdf/i.test(pv.mime || '') || /\.pdf$/i.test(pv.rel || '')) {
+            return h('iframe', {
+              className: 'daw-prev-pdf',
+              src: pv.dataUrl,
+              title: pv.rel || 'PDF 预览',
+            });
+          }
+          if (/^image\//i.test(pv.mime || '') || IMG_RE.test(pv.rel || '')) {
+            return h('img', { className: 'daw-prev-img', src: pv.dataUrl, alt: pv.rel || '图片产物' });
+          }
+          return h('div', { className: 'daw-prev-page' }, h('b', null, '二进制文件'), h('span', null, String(pv.mime || '未知类型')), h('span', null, '点「打开原文件」查看'));
+        }
+        const text = String(pv.text == null ? '' : pv.text);
+        return h(
+          'div',
+          null,
+          h('pre', { className: 'daw-prev-text' }, text || '（空文件）'),
+          pv.truncated ? h('div', { className: 'daw-hint' }, '文件较长，面板只显示前一段；完整内容点「打开原文件」。') : null,
+        );
+      };
+
+      return h(
+        'div',
+        { className: 'daw-page' },
         h(
           'div',
-          { className: 'daw-pipes' },
-          h('span', { className: 'daw-note-i' }, '流水线'),
-          pipes.map((p) =>
-            h(
-              'button',
-              {
-                key: p.id || p.name,
-                type: 'button',
-                className: 'daw-chip' + (name === p.name ? ' on' : ''),
-                onClick: () => {
-                  setPick(p.name);
-                  setRel('');
-                  setFile(null);
-                },
-              },
-              p.name,
-            ),
-          ),
-          h('span', { className: 'daw-note-i' }, '只读；编译与写操作在 Aris_Dsh'),
+          { className: 'daw-toolbar' },
+          h('span', { className: 'daw-note-i' }, data ? '根目录 ' + (data.root || '—') : ''),
         ),
-        h(
-          'div',
-          { className: 'daw-arts' },
-        h(
-          'div',
-          { className: 'daw-art-l' },
-          main
-            ? h(
-                'div',
-                { className: 'daw-main' },
-                h(
-                  'div',
-                  null,
-                  h('div', { className: 'daw-main-k' }, `主论文${main.label ? ' · ' + main.label : ''}`),
-                  h('div', { className: 'daw-main-n' }, main.name),
-                  h('div', { className: 'daw-main-k' }, `${fmtSize(main.size)} · ${ftFull(main.mtime)}`),
-                ),
-                h(
-                  'div',
-                  { className: 'daw-main-r' },
-                  h('button', { className: 'daw-btn', type: 'button', onClick: () => open(main.rel) }, '打开 PDF'),
-                  main.tex ? h('button', { className: 'daw-btn', type: 'button', onClick: () => open(main.tex) }, '看源码') : null,
-                ),
-              )
-            : h('div', { className: 'daw-note' }, '这条流水线还没有可打开的 PDF（编译在 Aris_Dsh 面板）。'),
-          groups.map((g) =>
-            h(
+        err ? h('div', { className: 'daw-err2' }, '读取产物失败：' + err) : null,
+        data
+          ? h(
               'div',
-              { key: (g.id || g.key) },
-              h('div', { className: 'daw-sec' }, `${g.label || (g.id || g.key)} · ${(g.files || []).length}`),
-              (g.files || []).slice(0, 120).map((f) =>
+              { className: 'daw-stack' },
+              h(
+                'div',
+                { className: 'daw-kpis' },
+                h(Kpi, { k: '文件', v: String(tot.files || 0), note: '分组 ' + ((data.groups || []).length + ' 组') }),
+                h(Kpi, { k: '体积', v: fmtSize(tot.bytes), note: '扫描 ' + (data.generatedAt ? ft(data.generatedAt) : '—') }),
+                h(Kpi, { k: '丢弃', v: String((data.warnings || []).length), note: '超限 / 读失败提示' }),
+                h(Kpi, { k: '主稿', v: mainPaper ? mainPaper.label || mainPaper.tex || '已定位' : '无', note: mainPaper ? fmtSize(mainPaper.size) : '没找到主稿' }),
+              ),
+              mainPaper && mainPaper.rel
+                ? h(
+                    'div',
+                    { className: 'daw-sc' },
+                    h(
+                      'div',
+                      { className: 'daw-sc-h' },
+                      h('b', { className: 'daw-sc-n' }, mainPaper.name || mainPaper.rel),
+                      h('span', { className: 'daw-badge' }, '主稿'),
+                      mainPaper.tex ? h('span', { className: 'daw-badge' }, 'TeX') : null,
+                      h('span', { className: 'daw-note-i' }, fmtSize(mainPaper.size) + ' · ' + ft(mainPaper.mtime)),
+                      h('button', { type: 'button', className: 'daw-mini', onClick: () => { setSel(mainPaper.rel); } }, '在预览里打开'),
+                    ),
+                    h('div', { className: 'daw-prev-p' }, mainPaper.rel),
+                  )
+                : null,
+              h(
+                'div',
+                { className: 'daw-split3' + (narrow ? ' narrow' : ''), ref: wrapRef, style: { '--daw-splitw': w + 'px' } },
                 h(
-                  'button',
-                  { key: (g.id || g.key) + f.rel, type: 'button', className: `daw-art-f${rel === f.rel ? ' on' : ''}`, onClick: () => open(f.rel), title: f.rel },
-                  h('span', null, f.name || f.rel),
-                  h('span', null, fmtSize(f.size)),
+                  'div',
+                  { className: 'daw-ftable' },
+                  h(
+                    'table',
+                    { className: 'daw-tbl2', style: { minWidth: '420px' } },
+                    h('thead', null, h('tr', null, ['分类 / 路径', '大小', '修改时间'].map((t) => h('th', { key: t }, t)))),
+                    h(
+                      'tbody',
+                      null,
+                      files.length
+                        ? (data.groups || []).reduce((acc, g) => {
+                            if (!(g.files || []).length) {
+                              acc.push(
+                                h(
+                                  'tr',
+                                  { key: 'g0' + g.id, className: 'grp' },
+                                  h('td', { colSpan: 3 }, (g.label || g.id) + ' · 0 个文件' + (g.searched === false ? '（没扫这个目录）' : '')),
+                                ),
+                              );
+                              return acc;
+                            }
+                            acc.push(h('tr', { key: 'g1' + g.id, className: 'grp' }, h('td', { colSpan: 3 }, (g.label || g.id) + ' · ' + g.count + ' 个 · ' + fmtSize(g.bytes))));
+                            g.files.forEach((f) =>
+                              acc.push(
+                                h(
+                                  'tr',
+                                  {
+                                    key: g.id + f.rel,
+                                    className: 'clk' + (sel === f.rel ? ' on' : ''),
+                                    onClick: () => setSel(f.rel),
+                                    title: f.rel,
+                                  },
+                                  h('td', null, h('div', { className: 'daw-cell2' }, h('b', null, f.name), h('small', null, f.rel))),
+                                  h('td', { className: 'num' }, fmtSize(f.size)),
+                                  h('td', { className: 'num' }, ft(f.mtime)),
+                                ),
+                              ),
+                            );
+                            return acc;
+                          }, [])
+                        : h('tr', null, h('td', { colSpan: 3 }, h('div', { className: 'daw-empty' }, '这条流水线还没有产物。'))),
+                    ),
+                  ),
+                ),
+                narrow ? null : h('button', {
+                  type: 'button',
+                  className: 'daw-splitbar' + (dragging ? ' on' : ''),
+                  title: '拖动调整宽度，双击复位',
+                  onMouseDown: (e) => {
+                    e.preventDefault();
+                    setDragging(true);
+                  },
+                  onDoubleClick: resetSplit,
+                }),
+                h(
+                  'div',
+                  { className: 'daw-prev' },
+                  h('div', { className: 'daw-prev-h' }, selFile ? selFile.name : sel ? String(sel).split('/').pop() : '选一个文件看预览'),
+                  selFile
+                    ? h(
+                        'div',
+                        { className: 'daw-prev-m' },
+                        h('span', null, fmtSize(selFile.size)),
+                        h('span', null, ft(selFile.mtime)),
+                        selFile.glabel ? h('span', null, selFile.glabel) : null,
+                        h('button', { type: 'button', className: 'daw-mini', onClick: resetSplit, title: '双击分隔条也能复位' }, '复位分栏'),
+                      )
+                    : null,
+                  sel ? h('div', { className: 'daw-prev-p' }, sel) : h('div', { className: 'daw-hint' }, '左边点一行，这里显示大小 / 时间 / 路径与内容。'),
+                  sel ? previewBody() : null,
+                  h(
+                    'div',
+                    { className: 'daw-prev-f' },
+                    h('button', { type: 'button', className: 'daw-btn', disabled: !sel, onClick: openFile }, '打开原文件'),
+                    h('button', { type: 'button', className: 'daw-btn', disabled: !sel, onClick: () => copyText(sel) }, '复制路径'),
+                    h('span', { className: 'daw-hint' }, '只读：不写、不删、不改产物'),
+                  ),
                 ),
               ),
-            ),
-          ),
-          files.length ? null : h('div', { className: 'daw-empty' }, '没有扫描到产物文件。'),
-        ),
-        h('div', { className: 'daw-art-v' }, view),
-        ),
+              (data.warnings || []).length ? h('div', { className: 'daw-note' }, '扫描提示：' + data.warnings.join('；')) : null,
+              h('div', { className: 'daw-note-i' }, '产物来自 ' + (data.driver || 'aris') + ' 驱动；表格在限高容器里内滚，表头吸顶。'),
+            )
+          : err
+            ? null
+            : h('div', { className: 'daw-empty' }, tr('loading')),
+        toast ? h('div', { className: 'daw-toast' }, toast) : null,
       );
     }
 
     const TABS = [
+      ['overview', '总览'],
       ['plan', '计划'],
       ['arts', '产物'],
       ['docs', '文档'],
     ];
 
     function WikiPanel() {
-      const [tab, setTab] = React.useState('plan');
+      const [tab, setTab] = React.useState('overview');
       const [planAll, setPlanAll] = React.useState(null);
       const [err, setErr] = React.useState('');
       const [busy, setBusy] = React.useState(false);
+      // 从总览跳进计划/产物时带上的流水线名 + 序号（同一名字连点也能重新定位）。
+      const [focus, setFocus] = React.useState({ name: '', seq: 0 });
 
-      const load = React.useCallback(async () => {
+      const load = React.useCallback(() => {
         setBusy(true);
         setErr('');
-        try {
-          const body = await getJson(`/api/aris-wiki/plan?name=all&t=${Date.now()}`);
-          if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
-          setPlanAll(body);
-        } catch (e) {
-          setErr(String((e && e.message) || e));
-        } finally {
-          setBusy(false);
-        }
+        getJson('/api/aris-wiki/plan?name=all&t=' + Date.now())
+          .then((body) => {
+            if (!body || body.ok === false) throw new Error((body && body.error) || '读取失败');
+            setPlanAll(body);
+          })
+          .catch((e) => setErr(String((e && e.message) || e)))
+          .then(() => setBusy(false));
       }, []);
 
       React.useEffect(() => {
@@ -1549,46 +2378,89 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       }, [load]);
 
       const pipes = (planAll && planAll.pipelines) || [];
+      const onOpen = (name, next) => {
+        selectRange(name || '');
+        setTab(next || 'plan');
+      };
+      const selected=pipes.find((p)=>p.name===focus.name);
+      const initial=selected?selected.name:'';
+      const single=tab==='plan'||tab==='arts';
+      const current=initial||(single&&pipes.length?pipes[0].name:'');
+      const [docRange,setDocRange]=React.useState('all');
+      const selectRange=(name)=>{
+        const p=pipes.find((p)=>p.name===name);
+        setDocRange(p?'project:'+p.id:'all');
+        setFocus({name,seq:Date.now()});
+      };
+      const counts = {
+        overview: pipes.length,
+        plan: pipes.length,
+      };
+
+      const body =
+        tab === 'overview'
+          ? h(OverviewTab, { planAll: planAll, onOpen: onOpen, scope:initial })
+          : tab === 'plan'
+            ? h(PlanTab, { key:current, pipes: pipes, initial: current })
+            : tab === 'arts'
+              ? h(ArtsTab, { key:current, pipes: pipes, initial: current })
+              : h(DocsPanel,{initial:docRange,label:initial,onScope:(key)=>{
+                setDocRange(key);const p=pipes.find((p)=>'project:'+p.id===key||'src:'+p.name===key);
+                setFocus((prev)=>({...prev,name:p?p.name:''}));
+              }});
+
+      const label = (TABS.filter((p) => p[0] === tab)[0] || [tab, tab])[1];
+
       return h(
         'div',
         { className: 'daw' },
         h('style', { dangerouslySetInnerHTML: { __html: CSS } }),
         h('style', { dangerouslySetInnerHTML: { __html: CSS2 } }),
+        h('style', { dangerouslySetInnerHTML: { __html: CSS3 } }),
+        h('style', { dangerouslySetInnerHTML: { __html: CSS4 } }),
         h(
           'div',
           { className: 'daw-head' },
           h(
             'div',
             null,
-            h('h2', null, 'Aris_Wiki'),
-            h('p', { className: 'daw-sub' }, '只读：计划与进展、论文产物、知识库文档。写操作（启停 / 门禁 / 编译）在 Aris_Dsh。'),
+            h('h2', { className: 'daw-title' }, T.title || 'Aris_Wiki'),
+            h('div', { className: 'daw-sub' }, '只读：计划与进展、论文产物、知识库文档。写操作（启停 / 门禁 / 编译）在 Aris_Dsh。'),
           ),
           h(
             'div',
             { className: 'daw-head-r' },
-            h('button', { className: 'daw-btn', type: 'button', disabled: busy, onClick: load }, busy ? '刷新中…' : tr('refresh')),
+            planAll && planAll.scannedAt ? h('span', { className: 'daw-note-i' }, '扫描 ' + ft(planAll.scannedAt)) : null,
+            h('span', { className: 'daw-note-i' }, '只读'),
+            h('button', { type: 'button', className: 'daw-btn', disabled: busy, onClick: load }, busy ? '刷新中…' : tr('refresh')),
           ),
         ),
         h(
           'div',
           { className: 'daw-tabs' },
-          TABS.map(([key, label]) =>
-            h('button', { key, type: 'button', className: `daw-tab${tab === key ? ' on' : ''}`, onClick: () => setTab(key) }, h('span', null, label)),
+          TABS.map((pair) =>
+            h(
+              'button',
+              { key: pair[0], type: 'button', className: 'daw-tab' + (tab === pair[0] ? ' on' : ''), onClick: () => setTab(pair[0]) },
+              pair[1],
+              counts[pair[0]] ? h('span', { className: 'daw-tab-n' }, String(counts[pair[0]])) : null,
+            ),
           ),
         ),
+        tab!=='docs'?h('label',{className:'daw-scope'},'流水线范围　',
+          h('select',{value:current,onChange:(e)=>selectRange(e.target.value)},
+            single?null:h('option',{value:''},'全部流水线'),
+            pipes.map((p)=>h('option',{key:p.name,value:p.name},p.name)))):null,
         err
           ? h(
               'div',
               { className: 'daw-err' },
-              h('div', null, `无法连接知识库宿主：${err}（宿主重载后才有 /plan、/artifacts 路由）`),
-              h('button', { className: 'daw-btn', type: 'button', onClick: load }, '重试'),
+              h('span', null, '无法连接知识库宿主：' + err + '（宿主重载后才有 /plan、/artifacts 路由）'),
+              h('button', { type: 'button', className: 'daw-btn', onClick: load }, '重试'),
             )
           : null,
-        tab === 'plan'
-          ? h(PlanTab, { planAll })
-          : tab === 'arts'
-            ? h(ArtsTab, { pipes })
-            : h(DocsPanel),
+        // 每个页签各自兜底：一个页签渲染抛错不牵连其它页签，且能原地重试。
+        h('div', { className: 'daw-body' }, h(TabBoundary, { key: tab + '-' + focus.seq, label: label }, body)),
       );
     }
 
@@ -1623,7 +2495,10 @@ div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:s
       apply(ctx) {
         try {
           const bound = ctx.locale.bind(NS);
-          if (typeof bound === 'function') tr = (key) => bound(key) || T[key] || key;
+          if (typeof bound === 'function') tr = (key) => {
+            const text = bound(key);
+            return text && text !== key ? text : T[key] || key;
+          };
         } catch {
           /* keep the built-in fallback */
         }

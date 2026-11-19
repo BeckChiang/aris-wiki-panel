@@ -1,11 +1,11 @@
 {
   "repo": "BeckChiang/aris-wiki-panel",
-  "generated_at": "2026-11-18T10:16:24.753Z",
+  "generated_at": "2026-11-19T11:40:30.358Z",
   "note": "由 scripts/sync.mjs 从本机 DSH 工作区单向生成；本文件为发布快照标识，请勿手改。",
   "rules_version": 1,
   "counts": {
     "files": 12,
-    "bytes": 160725
+    "bytes": 208663
   },
   "excluded": [
     "tests",
@@ -24,8 +24,8 @@
     },
     {
       "p": "client.js",
-      "sha256": "aa5d6810c3216ea7",
-      "bytes": 80704
+      "sha256": "7aa272e1b292650b",
+      "bytes": 130243
     },
     {
       "p": "cordis.patch.yml",
@@ -74,8 +74,8 @@
     },
     {
       "p": "README.md",
-      "sha256": "a9fccb572919781e",
-      "bytes": 6354
+      "sha256": "646b3280646947e8",
+      "bytes": 4753
     }
   ]
 }

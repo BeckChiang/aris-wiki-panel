@@ -17,7 +17,7 @@ window.__ModuleLoader__.load({
     ];
     const GLABEL = Object.fromEntries(GROUPS.map((g) => [(g.id || g.key), g.label]));
     const T = {
-      title: 'ARIS 知识库',
+      title: 'Aris_Wiki',
       all: '全部',
       refresh: '刷新',
       search: '搜索标题、路径或摘要…',
@@ -498,6 +498,7 @@ body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482;--st-run:
 .daw-dot.error,.daw-dot.blocked{background:var(--st-err)}
 .daw-next{display:flex;flex-direction:column;gap:1px;white-space:nowrap}.daw-next small{font-size:10.5px;color:var(--tx3)}
 .daw-badge{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 7px;border-radius:6px;border:0;font-size:11.5px;font-weight:500;white-space:nowrap;background:var(--st-idle-bg);color:var(--st-idle)}
+.daw-badge i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
 .daw-badge.running{background:var(--st-run-bg);color:var(--st-run)}
 .daw-badge.review,.daw-badge.stopping{background:var(--st-warn-bg);color:var(--st-warn)}
 .daw-badge.error,.daw-badge.blocked{background:var(--st-err-bg);color:var(--st-err)}
@@ -910,9 +911,8 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
         h(
           'div',
           { className: 'daw-card-h' },
-          h('span', { className: 'daw-dot ' + st }),
           h('b', null, c.name),
-          h('span', { className: 'daw-badge ' + st }, c.statusLabel || stText(st)),
+          h('span', { className: 'daw-badge ' + st }, h('i', null), c.statusLabel || stText(st)),
           c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
           pend.count ? h('span', { className: 'daw-badge review' }, '等回件 ' + pend.count) : null,
         ),
@@ -1199,8 +1199,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
             h(
               'div',
               { className: 'daw-st' },
-              h('span', { className: 'daw-dot ' + dotCls(st) }),
-              h('span', { className: 'daw-badge ' + st }, c.statusLabel || stText(st)),
+              h('span', { className: 'daw-badge ' + st }, h('i', null), c.statusLabel || stText(st)),
               c.human ? h('span', { className: 'daw-badge human' }, '需人工') : null,
             ),
           ),

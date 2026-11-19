@@ -36,8 +36,8 @@ window.__ModuleLoader__.load({
 div:not(.daw):has(> .daw){display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-width:0;width:100%;min-height:0;height:100%}
 div:not(.daw):has(> div > .daw){display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-width:0;width:100%;min-height:0;height:100%}
 .daw{padding:0;margin:0;display:flex;flex-direction:column;gap:0;flex:1 1 auto;align-self:stretch;width:100%;min-width:0;min-height:0;height:100%;box-sizing:border-box;font-size:13px;line-height:1.65;color:var(--tx);background:var(--dsw-alias-bg-base,#fff);overflow:hidden}
-.daw{--tx:#111318;--tx2:#5a6270;--tx3:#8b929e;--a:var(--dsw-alias-brand-primary,#2563eb);--a-bg:color-mix(in srgb,var(--dsw-alias-brand-primary,#2563eb) 11%,transparent);--ln:rgba(127,127,127,.20)}
-body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482}
+.daw{--tx:#111318;--tx2:#5a6270;--tx3:#8b929e;--a:var(--dsw-alias-brand-primary,#2563eb);--a-bg:color-mix(in srgb,var(--dsw-alias-brand-primary,#2563eb) 11%,transparent);--ln:rgba(127,127,127,.20);--st-run:#2563eb;--st-run-bg:#eaf1ff;--st-warn:#b45309;--st-warn-bg:#fef4e6;--st-err:#c6231b;--st-err-bg:#fdeceb;--st-ok:#157f3d;--st-ok-bg:#e9f7ee;--st-idle:#6b7280;--st-idle-bg:#f1f2f4}
+body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482;--st-run:#6f9dff;--st-run-bg:#16233c;--st-warn:#e8a33d;--st-warn-bg:#2e2415;--st-err:#ff7a6b;--st-err-bg:#331a18;--st-ok:#4ec98a;--st-ok-bg:#13291e;--st-idle:#8b93a1;--st-idle-bg:#1c2027}
 .daw h2{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--tx)}
 .daw h3{margin:0;font-size:14px;font-weight:600}
 .daw-sub{margin:3px 0 0;font-size:11.5px;color:var(--tx3)}
@@ -494,11 +494,15 @@ body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482}
 .daw-card-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .daw-card-r{margin-left:auto;font-size:11.5px;color:var(--tx3);white-space:nowrap;font-variant-numeric:tabular-nums}
 .daw-dot{width:8px;height:8px;border-radius:50%;background:rgba(127,127,127,.45);flex:0 0 8px}
-.daw-dot.running{background:#0f766e;box-shadow:0 0 0 3px rgba(15,118,110,.18)}
-.daw-dot.error,.daw-dot.blocked{background:#b42318}
-.daw-badge{font-size:11px;line-height:16px;padding:0 7px;border-radius:999px;border:1px solid rgba(127,127,127,.35);opacity:.85;white-space:nowrap}
-.daw-badge.running{color:#0f766e;border-color:rgba(15,118,110,.5)}
-.daw-badge.human{color:#b42318;border-color:rgba(180,35,24,.5)}
+.daw-dot.running{background:var(--st-run);box-shadow:0 0 0 3px color-mix(in srgb,var(--st-run) 22%,transparent)}
+.daw-dot.error,.daw-dot.blocked{background:var(--st-err)}
+.daw-next{display:flex;flex-direction:column;gap:1px;white-space:nowrap}.daw-next small{font-size:10.5px;color:var(--tx3)}
+.daw-badge{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 7px;border-radius:6px;border:0;font-size:11.5px;font-weight:500;white-space:nowrap;background:var(--st-idle-bg);color:var(--st-idle)}
+.daw-badge.running{background:var(--st-run-bg);color:var(--st-run)}
+.daw-badge.review,.daw-badge.stopping{background:var(--st-warn-bg);color:var(--st-warn)}
+.daw-badge.error,.daw-badge.blocked{background:var(--st-err-bg);color:var(--st-err)}
+.daw-badge.idle,.daw-badge.stopped,.daw-badge.paused,.daw-badge.ok{background:var(--st-idle-bg);color:var(--st-idle)}
+.daw-badge.human{background:var(--st-err-bg);color:var(--st-err)}
 .daw-rail{display:flex;gap:3px;height:8px;align-items:stretch}
 .daw-seg{flex:1 1 auto;border-radius:3px;background:rgba(127,127,127,.22);min-width:6px}
 .daw-seg.done{background:#0f766e}
@@ -608,7 +612,6 @@ body[data-ds-dark-theme] .daw{--tx:#e6e9ef;--tx2:#9aa3b2;--tx3:#6b7482}
 .daw-card[role=button]{cursor:pointer}
 .daw-card-sub{font-size:11.5px;opacity:.62;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .daw-card-now{font-size:11.5px;opacity:.8;font-variant-numeric:tabular-nums}
-.daw-badge.review{color:#b26a00;border-color:rgba(178,106,0,.5)}
 .daw-now{display:flex;flex-wrap:wrap;gap:6px 18px;border:1px solid rgba(127,127,127,.18);border-radius:10px;padding:8px 12px;font-size:12px}
 .daw-now-i{display:flex;gap:6px;align-items:baseline;min-width:0}
 .daw-now-i.wide{flex:1 1 320px}
@@ -774,7 +777,7 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
       running: '正在运行',
       stopping: '停止中',
       review: '等待审核',
-      human: '等待人工',
+      human: '需人工',
       idle: '待命',
       paused: '已暂停',
       stopped: '已停止',
@@ -1234,7 +1237,10 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
             null,
             h('div', { className: 'daw-cell2' }, h('span', null, money(tot.todayCny)), h('small', null, '累计 ' + money(tot.cny) + ' · ' + tot.runs + ' 轮')),
           ),
-          h('td', null, st === 'running' ? '在跑' : c.nextAt ? ft(c.nextAt) : '—'),
+          h('td', { className: 'daw-next' },
+            h('span', null, st === 'running' ? '本轮结束后' : c.nextAt ? ft(c.nextAt) : '—'),
+            h('small', null, st === 'running' ? '在跑' : st === 'stopped' || st === 'idle' ? '未排期' : c.nextAt ? '按间隔' : '—'),
+          ),
         );
       });
 

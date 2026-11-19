@@ -1,11 +1,11 @@
 {
   "repo": "BeckChiang/aris-wiki-panel",
-  "generated_at": "2026-11-19T13:34:18.279Z",
+  "generated_at": "2026-11-19T14:11:30.173Z",
   "note": "由 scripts/sync.mjs 从本机 DSH 工作区单向生成；本文件为发布快照标识，请勿手改。",
   "rules_version": 1,
   "counts": {
     "files": 12,
-    "bytes": 213030
+    "bytes": 213159
   },
   "excluded": [
     "tests",
@@ -49,8 +49,8 @@
     },
     {
       "p": "lib/plan.mjs",
-      "sha256": "c1a82a2272a36721",
-      "bytes": 35941
+      "sha256": "f96d6b0a1e1f65c0",
+      "bytes": 36070
     },
     {
       "p": "LICENSE",

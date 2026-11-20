@@ -879,6 +879,11 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
       );
     }
 
+    function roleLine(c) {
+      if (!c.executor) return '—';
+      const reviewer = { kimi: 'Kimi 邮箱', gpt: 'GPT', deepseek: 'DeepSeek', auto: '项目审稿槽' }[c.reviewer];
+      return (c.executor === 'kimi' ? 'Kimi A/B' : 'DSH') + ' → ' + (reviewer || '审稿者未知');
+    }
     function nowLineOf(c) {
       const nd = c.nowDoing || {};
       if (nd.running) {
@@ -1181,7 +1186,8 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
           .toLowerCase();
         return hay.indexOf(ql) >= 0;
       };
-      const rows = pipes.filter((c) => inFilter(c) && hit(c));
+      const priority = c => c.human ? 0 : ({ error: 1, running: 2, stopping: 2, review: 3, quota: 3, idle: 4 }[stOf(c)] ?? 5);
+      const rows = pipes.filter(c => inFilter(c) && hit(c)).sort((a, b) => priority(a) - priority(b));
       const counts = {
         all: pipes.length,
         running: pipes.filter((c) => stOf(c) === 'running' || stOf(c) === 'stopping').length,
@@ -1229,8 +1235,8 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
             h(
               'div',
               { className: 'daw-cell2' },
-              h('span', null, nowLineOf(c)),
-              h('small', null, (c.stageId || '-') + ' · ' + (c.nextAt ? '下轮 ' + ft(c.nextAt) : '无下轮')),
+              h('span', null, c.currentTask || nowLineOf(c)),
+              h('small', null, c.topBlocker?.text || (c.nextAt ? '下轮 ' + ft(c.nextAt) : '')),
             ),
           ),
           h('td', null, (c.gates ? c.gates.done : 0) + '/' + (c.gates ? c.gates.total : 0)),
@@ -1277,7 +1283,10 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
                 'div',
                 { className: 'daw-sc-kv' },
                 kv('阶段', (sel.stageIndex || 0) + '/' + (sel.stageTotal || 0) + ' · ' + (sel.stageTitle || sel.stageId || '-')),
-                kv('现在', nowLineOf(sel), true),
+                kv('执行者 → 审稿者', roleLine(sel)),
+                kv('当前任务', sel.currentTask || nowLineOf(sel), true),
+                ...reviewQuotaLines(sel.roundBlockedTasks, sel.reviewQuotaTasks),
+                sel.human ? kv('人工裁决', 'Aris_Dsh → 流水线 → ' + sel.name + ' → 需要人工介入', true) : null,
                 kv('门禁', (sel.gates ? sel.gates.done : 0) + '/' + (sel.gates ? sel.gates.total : 0)),
                 kv('回件', pend.count ? '在途 ' + pend.count + (pend.over ? ' · 超阈值' : '') : '无在途审稿'),
                 kv('阻碍', String(sel.blockers || 0)),
@@ -1369,6 +1378,13 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
 
     // 计划详情：状态卡 → 阻碍（通栏表）→ 门禁（通栏表）→ 总计划（阶段树 + 11 阶段表）
     // → 当前阶段三栏步骤 → 最近轮次（成本柱状图 + 表）→ 时间线。各分节默认折叠。
+    function reviewQuotaLines(blocked, tasks) {
+      const planned = (blocked || []).map((item, index) => h('div', { key: 'round-' + index, className: 'daw-note-i' },
+        item.task + ' · ' + item.reason + (item.freeAt ? ' · ' + ft(item.freeAt) + ' 后可重试' : '')));
+      return planned.concat((tasks || []).filter(item => !item.blocked).map(item => h('div', { key: item.target, className: 'daw-note-i' },
+        '额度已恢复，待送审 · ' + item.task)));
+    }
+
     function PlanDetail(props) {
       const d = props.detail;
       const [openSec, setOpenSec] = React.useState({});
@@ -1669,10 +1685,24 @@ body[data-ds-dark-theme] .daw select{color-scheme:dark}.daw-list summary,.daw-sc
           h('span', { className: 'daw-note-i' }, '只读'),
           h('span', { className: 'daw-note-i' }, 'runId ' + (now.runId || '未运行') + (now.pid ? ' · pid ' + now.pid : '')),
         ),
+        now.currentTask ? h('p', { className: 'daw-card-now' }, h('b', null, '当前任务　'), now.currentTask) : null,
+        ...reviewQuotaLines(now.roundBlockedTasks, now.reviewQuotaTasks),
+        d.blockers?.[0] ? h('div', { className: 'daw-note-i' }, d.blockers[0].text) : null,
+        d.human ? h('div', { className: 'daw-note-i' },
+          h('p', null, '人工裁决入口：Aris_Dsh → 流水线 → ' + (d.pipeline?.name || props.name) + ' → 需要人工介入'),
+          h('button', { type: 'button', className: 'daw-mini', onClick: () => {
+            setOpenSec(prev => ({ ...prev, blocks: true }));
+            setTimeout(() => scrollTo('daw-sec-blocks'), 60);
+          } }, '查看阻塞依据'),
+          h('button', { type: 'button', className: 'daw-mini', onClick: async () => {
+            const name = d.pipeline?.name || props.name;
+            say(await copyText(name) ? '已复制项目名：' + name : '请手动复制项目名：' + name);
+          } }, '复制项目名')) : null,
         h(Rail, { stages: stages, activeId: sel || (curStage && curStage.id) }),
         h(
           'div',
           { className: 'daw-sc-kv' },
+          kv('执行者 → 审稿者', roleLine(now)),
           kv('阶段', (now.stageIndex || 0) + '/' + (now.stageTotal || 0) + ' · ' + (now.stageTitle || now.stageId || '-') + (now.state ? ' · ' + now.state : '')),
           kv(
             '现在',
